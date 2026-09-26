@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PsychoQuest & MindPulse | Plataforma Gamificada</title>
+  <title>UDD Psicología &middot; Suite de Gamificación</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -11,26 +11,26 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-  <!-- HEADER & NAVIGATION -->
+  <!-- HEADER & NAVIGATION CON BRANDING UDD -->
   <header class="navbar">
     <div class="nav-brand">
-      <div class="brand-logo">
-        <span class="logo-icon">✨</span>
+      <div class="brand-logo-wrap">
+        <img src="Psicologia.png" alt="Universidad del Desarrollo - Facultad de Psicología" class="udd-logo-img">
       </div>
-      <div>
-        <h1 class="brand-title">PsychoQuest &middot; Suite Gamificada</h1>
-        <p class="brand-subtitle">Simulador Clínico &middot; Bienestar Corporativo MindPulse</p>
+      <div class="brand-info">
+        <h1 class="brand-title">PsychoQuest &middot; UDD</h1>
+        <p class="brand-subtitle">Facultad de Psicología &middot; Plataforma de Aprendizaje & Bienestar</p>
       </div>
     </div>
     
     <nav class="nav-tabs" role="tablist">
       <button class="nav-tab active" data-tab="aula" role="tab" id="tab-aula">
         <span class="tab-icon">🧠</span>
-        <span>Simulador Clínico TCC</span>
+        <span class="tab-text">Simulador Clínico TCC</span>
       </button>
       <button class="nav-tab" data-tab="empresa" role="tab" id="tab-empresa">
         <span class="tab-icon">🏢</span>
-        <span>MindPulse Workspace</span>
+        <span class="tab-text">MindPulse UDD Workspace</span>
       </button>
     </nav>
   </header>
@@ -39,20 +39,19 @@
 
     <!-- ==================== TAB 1: SIMULADOR CLÍNICO AULA ==================== -->
     <section id="pane-aula" class="tab-pane active" role="tabpanel">
-      <!-- Simulator Interactive Area -->
       <div class="game-dashboard">
-        <!-- Stats Bar -->
+        <!-- Stats Bar Responsive -->
         <div class="game-stats-bar">
           <div class="stat-box">
-            <span class="stat-label">Rango Clínico:</span>
+            <span class="stat-label">Rango UDD:</span>
             <span class="stat-value" id="player-title">Interno Novato 🟢</span>
           </div>
           <div class="stat-box">
-            <span class="stat-label">Puntos de Empatía (XP):</span>
+            <span class="stat-label">Puntos Clínicos (XP):</span>
             <span class="stat-value text-accent" id="player-xp">0 XP</span>
           </div>
           <div class="stat-box">
-            <span class="stat-label">Oportunidades Clínicas:</span>
+            <span class="stat-label">Oportunidades:</span>
             <div class="lives-container" id="player-lives">
               <span class="heart">❤️</span>
               <span class="heart">❤️</span>
@@ -60,11 +59,11 @@
             </div>
           </div>
           <div class="stat-box">
-            <span class="stat-label">Racha Terapéutica:</span>
+            <span class="stat-label">Racha Clínica:</span>
             <span class="stat-value text-gold" id="player-streak">🔥 0</span>
           </div>
-          <div class="stat-box">
-            <span class="stat-label">Progreso de la Consulta:</span>
+          <div class="stat-box progress-stat">
+            <span class="stat-label">Progreso:</span>
             <div class="progress-bar-wrap">
               <div class="progress-bar-fill" id="game-progress" style="width: 0%;"></div>
             </div>
@@ -76,39 +75,39 @@
           <!-- Intro Screen -->
           <div id="game-intro-view" class="game-view active">
             <div class="mission-intro">
-              <div class="mission-badge">🎮 SIMULADOR DE INTERVENCIÓN CLÍNICA TCC</div>
-              <h2 class="mission-title">Laboratorio de Reestructuración Cognitiva</h2>
+              <div class="mission-badge">🎓 LABORATORIO DE SIMULACIÓN CLÍNICA TCC &middot; UDD</div>
+              <h2 class="mission-title">Entrenamiento en Reestructuración Cognitiva</h2>
               <p class="mission-text">
-                Bienvenido al simulador de entrenamiento clínico. Tu misión como terapeuta es evaluar los pensamientos automáticos de tres pacientes, identificar con precisión sus distorsiones cognitivas y aplicar la intervención terapéutica adecuada.
+                Bienvenido al simulador formativo de la Facultad de Psicología UDD. Tu objetivo como terapeuta en formación es evaluar las consultas de tres pacientes, identificar sus distorsiones de pensamiento y aplicar la intervención cognitivo-conductual precisa.
               </p>
 
               <div class="pedagogical-focus-grid">
                 <div class="focus-item">
                   <span class="focus-icon">🎯</span>
                   <div>
-                    <strong>Misión Terapéutica</strong>
-                    <p>Evalúa 3 casos reales de pacientes con síntomas de ansiedad, depresión y fobia social.</p>
+                    <strong>Casos Clínicos Reales</strong>
+                    <p>Evalúa pacientes simulados con síntomas de ansiedad, depresión y sobreexigencia.</p>
                   </div>
                 </div>
                 <div class="focus-item">
                   <span class="focus-icon">❤️</span>
                   <div>
-                    <strong>3 Oportunidades Clínicas</strong>
-                    <p>Cuentas con 3 vidas. Cada error te brindará retroalimentación y la opción de reintentar.</p>
+                    <strong>3 Vidas / Oportunidades</strong>
+                    <p>El error es formativo: recibe retroalimentación explicativa y reintenta.</p>
                   </div>
                 </div>
                 <div class="focus-item">
                   <span class="focus-icon">🏆</span>
                   <div>
-                    <strong>Acreditación Senior</strong>
-                    <p>Acumula puntos de experiencia (XP), mantén tu racha de aciertos y desbloquea insignias.</p>
+                    <strong>Acreditación de Competencias</strong>
+                    <p>Acumula XP, mantén tu racha de diagnósticos y desbloquea insignias de mérito.</p>
                   </div>
                 </div>
               </div>
 
               <div class="action-row">
                 <button class="btn btn-primary btn-lg" id="btn-start-game">
-                  🚀 Iniciar Consulta Clínica
+                  🚀 Iniciar Sesión de Diagnóstico
                 </button>
               </div>
             </div>
@@ -121,7 +120,7 @@
                 <span class="badge" id="case-counter-badge">Caso 1 de 3</span>
                 <span class="case-patient-name" id="case-patient-name">Paciente: Martín (24 años)</span>
               </div>
-              <div class="scenario-tag" id="case-tag">Motivo de Consulta: Ansiedad Generalizada</div>
+              <div class="scenario-tag" id="case-tag">Motivo: Ansiedad ante Evaluaciones</div>
             </div>
 
             <!-- Patient Dialogue Box -->
@@ -147,10 +146,10 @@
             <div class="feedback-panel hidden" id="feedback-panel">
               <div class="feedback-icon" id="feedback-icon">💡</div>
               <div class="feedback-body">
-                <h4 id="feedback-title">Análisis Clínico</h4>
+                <h4 id="feedback-title">Análisis Clínico UDD</h4>
                 <p id="feedback-msg">Explicación teórica aquí...</p>
                 <div class="feedback-actions">
-                  <button class="btn btn-primary" id="btn-next-question">Continuar con el siguiente caso ➡️</button>
+                  <button class="btn btn-primary" id="btn-next-question">Continuar al siguiente caso ➡️</button>
                   <button class="btn btn-secondary hidden" id="btn-retry-question">🔄 Reintentar Caso (Usa 1 Oportunidad)</button>
                 </div>
               </div>
@@ -162,12 +161,12 @@
             <div class="result-box">
               <div class="result-trophy" id="result-trophy">🏆</div>
               <h2 class="result-title" id="result-title">¡Sesión Clínica Completada con Éxito!</h2>
-              <p class="result-desc" id="result-desc">Has demostrado un alto dominio clínico en la detección y abordaje de distorsiones de pensamiento.</p>
+              <p class="result-desc" id="result-desc">Has demostrado un alto dominio clínico en la detección y reestructuración de distorsiones de pensamiento.</p>
 
               <div class="result-badges-grid">
                 <div class="badge-card unlocked">
                   <span class="b-icon">🎓</span>
-                  <span class="b-name">Terapeuta TCC Acreditado</span>
+                  <span class="b-name">Terapeuta TCC UDD</span>
                 </div>
                 <div class="badge-card unlocked">
                   <span class="b-icon">🧠</span>
@@ -206,20 +205,19 @@
 
     <!-- ==================== TAB 2: EMPRESA WORKSPACE ==================== -->
     <section id="pane-empresa" class="tab-pane" role="tabpanel">
-      <!-- Company Interactive Dashboard -->
       <div class="company-showcase-grid">
         <!-- Interactive Employee Panel -->
         <div class="card panel-corporate">
           <div class="card-header">
-            <h3>📱 Mi Panel de Bienestar &middot; MindPulse</h3>
+            <h3>📱 Portal del Colaborador &middot; MindPulse UDD</h3>
             <span class="badge badge-success">Sesión Activa</span>
           </div>
           <div class="card-body">
             <div class="user-pulse-header">
               <div class="avatar-user">👩‍💻</div>
-              <div>
+              <div class="user-meta-wrap">
                 <strong>Camila Soto</strong>
-                <div class="user-team">Rol: UX/UI Specialist &middot; Escuadra Alpha 🚀</div>
+                <div class="user-team">UX/UI Specialist &middot; Escuadra Innovación 🚀</div>
               </div>
               <div class="user-zen-points">
                 <span id="zen-points-display">⚡ 450 ZenXP</span>
@@ -235,7 +233,7 @@
                   <span class="task-icon">🧘</span>
                   <div>
                     <strong>Micro-Pausa Activa (5 min Mindfulness)</strong>
-                    <p>Desconecta la vista de la pantalla y respira conscientemente.</p>
+                    <p>Desconecta la vista de la pantalla y realiza respiración diafragmática.</p>
                   </div>
                 </div>
                 <button class="btn btn-outline-primary btn-sm" onclick="completeCorporateTask(1, 50, 'Micro-Pausa completada (+50 ZenXP)')">
@@ -275,18 +273,18 @@
 
             <!-- Reward Store -->
             <div class="reward-market">
-              <h4>🎁 Catálogo de Canje de Hábitos Zen</h4>
+              <h4>🎁 Catálogo de Beneficios y Bienestar</h4>
               <div class="reward-chips">
                 <div class="reward-chip" onclick="redeemReward('Viernes tarde libre (Tarde Chill)', 500)">
                   <span>🏖️ Medio día libre de desconexión</span>
                   <strong>500 ZenXP</strong>
                 </div>
-                <div class="reward-chip" onclick="redeemReward('Bono Cafetería / Snacks saludables', 200)">
-                  <span>☕ Bono Café Saludable</span>
+                <div class="reward-chip" onclick="redeemReward('Bono Cafetería UDD / Snacks saludables', 200)">
+                  <span>☕ Bono Café / Snack Saludable</span>
                   <strong>200 ZenXP</strong>
                 </div>
-                <div class="reward-chip" onclick="redeemReward('Suscripción Calm / Headspace 1 año', 350)">
-                  <span>🎧 Membresía Mindfulness Anual</span>
+                <div class="reward-chip" onclick="redeemReward('Suscripción Headspace / Calm 1 año', 350)">
+                  <span>🎧 Membresía Mindfulness 1 Año</span>
                   <strong>350 ZenXP</strong>
                 </div>
               </div>
@@ -298,7 +296,7 @@
         <div class="card panel-corporate-stats">
           <div class="card-header">
             <h3>🏆 Ranking de Escuadras & Métricas</h3>
-            <span class="badge badge-purple">Desafío Semanal</span>
+            <span class="badge badge-udd">Desafío Semanal UDD</span>
           </div>
           <div class="card-body">
             <div class="kpi-grid">
@@ -320,26 +318,26 @@
                     <tr>
                       <th>Puesto</th>
                       <th>Escuadra</th>
-                      <th>Pausas Completadas</th>
+                      <th>Pausas</th>
                       <th>Puntos Zen Colectivos</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>🥇 1°</td>
-                      <td><strong>Escuadra Alpha (Design)</strong></td>
+                      <td><strong>Escuadra Innovación (Design)</strong></td>
                       <td>48 / 50</td>
                       <td><span class="badge-green">3.850 ZenXP</span></td>
                     </tr>
                     <tr>
                       <td>🥈 2°</td>
-                      <td><strong>Escuadra Frontend Devs</strong></td>
+                      <td><strong>Escuadra Tech & Devs</strong></td>
                       <td>44 / 50</td>
                       <td><span class="badge-green">3.420 ZenXP</span></td>
                     </tr>
                     <tr>
                       <td>🥉 3°</td>
-                      <td><strong>Escuadra Backend & DevOps</strong></td>
+                      <td><strong>Escuadra Operaciones</strong></td>
                       <td>39 / 50</td>
                       <td><span class="badge-green">3.100 ZenXP</span></td>
                     </tr>
@@ -353,15 +351,15 @@
               <div class="log-items" id="activity-log">
                 <div class="log-item">
                   <span class="log-dot"></span>
-                  <p><strong>Tomás R.</strong> completó 5 min de meditación respiratoria. (+50 ZenXP)</p>
+                  <p><strong>Tomás R.</strong> completó 5 min de pausa activa. (+50 ZenXP)</p>
                 </div>
                 <div class="log-item">
                   <span class="log-dot"></span>
-                  <p><strong>Camila S.</strong> envió un Kudo a <strong>Matías F.</strong>: "Gran soporte en el sprint".</p>
+                  <p><strong>Camila S.</strong> envió un Kudo a <strong>Matías F.</strong>: "Excelente soporte en el proyecto".</p>
                 </div>
                 <div class="log-item">
                   <span class="log-dot"></span>
-                  <p><strong>Escuadra Alpha</strong> desbloqueó la insignia colectiva <em>"Zen Masters 🌟"</em>.</p>
+                  <p><strong>Escuadra Innovación</strong> desbloqueó la insignia <em>"Zen Masters UDD 🌟"</em>.</p>
                 </div>
               </div>
             </div>
@@ -374,7 +372,10 @@
 
   <footer class="app-footer">
     <div class="footer-content">
-      <p>PsychoQuest & MindPulse Workspace &middot; Plataforma de Gamificación Interactiva</p>
+      <div class="footer-logo-row">
+        <img src="Psicologia.png" alt="Universidad del Desarrollo" class="footer-udd-logo">
+      </div>
+      <p>Universidad del Desarrollo &middot; Facultad de Psicología &middot; Herramientas Tecnológicas, Innovación y Creatividad</p>
     </div>
   </footer>
 
