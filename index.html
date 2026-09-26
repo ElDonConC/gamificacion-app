@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- Supabase JS Client & Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
@@ -180,7 +182,7 @@
 
               <div class="final-score-row">
                 <div class="score-card">
-                  <span class="sc-label">Puntaje Final</span>
+                  <span class="sc-label">Puntaje Guardado</span>
                   <span class="sc-value" id="final-score">300 XP</span>
                 </div>
                 <div class="score-card">
@@ -210,7 +212,7 @@
         <div class="card panel-corporate">
           <div class="card-header">
             <h3>📱 Portal del Colaborador &middot; MindPulse UDD</h3>
-            <span class="badge badge-success">Sesión Activa</span>
+            <span class="badge badge-success">Guardado Automático</span>
           </div>
           <div class="card-body">
             <div class="user-pulse-header">
@@ -347,20 +349,9 @@
             </div>
 
             <div class="live-activity-log">
-              <h4>🔔 Registro de Actividad en Vivo</h4>
+              <h4>🔔 Registro de Actividad en Vivo (Persistente)</h4>
               <div class="log-items" id="activity-log">
-                <div class="log-item">
-                  <span class="log-dot"></span>
-                  <p><strong>Tomás R.</strong> completó 5 min de pausa activa. (+50 ZenXP)</p>
-                </div>
-                <div class="log-item">
-                  <span class="log-dot"></span>
-                  <p><strong>Camila S.</strong> envió un Kudo a <strong>Matías F.</strong>: "Excelente soporte en el proyecto".</p>
-                </div>
-                <div class="log-item">
-                  <span class="log-dot"></span>
-                  <p><strong>Escuadra Innovación</strong> desbloqueó la insignia <em>"Zen Masters UDD 🌟"</em>.</p>
-                </div>
+                <!-- Injected dynamically from stored state -->
               </div>
             </div>
           </div>

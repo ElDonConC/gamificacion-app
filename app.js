@@ -1,6 +1,30 @@
 // ==========================================================================
-// DATA & STATE: PSYCHOQUEST & MINDPULSE SUITE
+// DATA & STATE: PSYCHOQUEST & MINDPULSE SUITE (WITH HYBRID PERSISTENCE)
 // ==========================================================================
+
+// Supabase Configuration (Optional Cloud Sync + Instant LocalStorage Fallback)
+const SUPABASE_CONFIG = {
+  url: window.SUPABASE_URL || 'https://xyzcompany.supabase.co', // Configurable via window.SUPABASE_URL
+  anonKey: 'sb_publishable_7ZurdpCSncXBeIRKy_T67A_iP1Yj0Dx'
+};
+
+let supabaseClient = null;
+if (typeof supabase !== 'undefined' && window.SUPABASE_URL) {
+  try {
+    supabaseClient = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+    console.log("Supabase Client initialized successfully.");
+  } catch (e) {
+    console.warn("Supabase init error, continuing with local storage:", e);
+  }
+}
+
+const STORAGE_KEYS = {
+  CLINICAL_SESSION: 'udd_psycho_clinical_session',
+  ZEN_POINTS: 'udd_mindpulse_zen_xp',
+  COMPLETED_TASKS: 'udd_mindpulse_completed_tasks',
+  ACTIVITY_LOG: 'udd_mindpulse_activity_log',
+  REDEEMED_REWARDS: 'udd_mindpulse_redeemed_rewards'
+};
 
 const CLINICAL_CASES = [
   {
@@ -106,7 +130,13 @@ let maxStreak = 0;
 let correctCount = 0;
 let hasAnsweredCurrent = false;
 
-let zenXP = 450;
+let zenXP = parseInt(localStorage.getItem(STORAGE_KEYS.ZEN_POINTS)) || 450;
+let completedTasks = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMPLETED_TASKS)) || [];
+let activityLogs = JSON.parse(localStorage.getItem(STORAGE_KEYS.ACTIVITY_LOG)) || [
+  { text: "Tomás R. completó 5 min de pausa activa. (+50 ZenXP)", user: "Tomás R." },
+  { text: "Camila S. envió un Kudo a Matías F.: 'Excelente soporte en el proyecto'.", user: "Camila S." },
+  { text: "Escuadra Innovación desbloqueó la insignia 'Zen Masters UDD 🌟'.", user: "Escuadra Innovación" }
+];
 
 // ==========================================================================
 // INITIALIZATION
@@ -114,6 +144,7 @@ let zenXP = 450;
 document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initGameEvents();
+  loadSavedCorporateState();
 });
 
 function initTabs() {
@@ -297,6 +328,14 @@ function finishGame() {
   const accuracy = Math.round((correctCount / CLINICAL_CASES.length) * 100);
   document.getElementById('final-accuracy').textContent = `${accuracy}%`;
 
+  // Persist session history
+  saveClinicalSession({
+    score: playerXP,
+    accuracy: accuracy,
+    maxStreak: maxStreak,
+    date: new Date().toISOString()
+  });
+
   if (playerXP >= 200) {
     document.getElementById('result-trophy').textContent = '🏆';
     document.getElementById('result-title').textContent = '¡Acreditación Clínica Lograda!';
@@ -330,11 +369,32 @@ function updateStatsUI() {
   }
 }
 
+function saveClinicalSession(sessionData) {
+  try {
+    const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.CLINICAL_SESSION)) || [];
+    history.push(sessionData);
+    localStorage.setItem(STORAGE_KEYS.CLINICAL_SESSION, JSON.stringify(history));
+
+    if (supabaseClient) {
+      supabaseClient.from('clinical_sessions').insert([sessionData]).then(() => {
+        console.log("Synced clinical session to Supabase.");
+      }).catch(err => console.warn("Supabase sync:", err));
+    }
+  } catch (e) {
+    console.error("Storage error:", e);
+  }
+}
+
 // ==========================================================================
-// CORPORATE WORKSPACE INTERACTION (EMPRESA)
+// CORPORATE WORKSPACE INTERACTION (EMPRESA & PERSISTENCE)
 // ==========================================================================
 function completeCorporateTask(taskId, points, msg) {
   zenXP += points;
+  if (!completedTasks.includes(taskId)) {
+    completedTasks.push(taskId);
+  }
+  
+  saveCorporateState();
   updateCorporateUI();
   
   const taskCard = document.getElementById(`task-${taskId}`);
@@ -348,19 +408,24 @@ function completeCorporateTask(taskId, points, msg) {
     }
   }
 
-  // Add item to activity log
   addActivityLog(`Completaste una micro-pausa activa (+${points} ZenXP)`);
 }
 
 function registerMood(moodName) {
   zenXP += 30;
+  saveCorporateState();
   updateCorporateUI();
   addActivityLog(`Registraste tu check-in de ánimo: "${moodName}" (+30 ZenXP)`);
+  
+  if (typeof confetti === 'function') {
+    confetti({ particleCount: 25, spread: 40 });
+  }
 }
 
 function redeemReward(rewardName, cost) {
   if (zenXP >= cost) {
     zenXP -= cost;
+    saveCorporateState();
     updateCorporateUI();
     addActivityLog(`Canjeaste la recompensa: "${rewardName}"`);
     alert(`🎉 ¡Canje exitoso!\nHas desbloqueado: "${rewardName}".\nTu nuevo saldo es ${zenXP} ZenXP.`);
@@ -378,11 +443,60 @@ function updateCorporateUI() {
 }
 
 function addActivityLog(text) {
+  const item = { text: `Tú ${text}.`, user: "Tú", timestamp: new Date().toLocaleTimeString() };
+  activityLogs.unshift(item);
+  if (activityLogs.length > 10) activityLogs.pop();
+  
+  saveCorporateState();
+  renderActivityLogs();
+}
+
+function renderActivityLogs() {
   const logContainer = document.getElementById('activity-log');
   if (!logContainer) return;
 
-  const item = document.createElement('div');
-  item.className = 'log-item';
-  item.innerHTML = `<span class="log-dot"></span><p><strong>Tú</strong> ${text}.</p>`;
-  logContainer.insertBefore(item, logContainer.firstChild);
+  logContainer.innerHTML = '';
+  activityLogs.forEach(log => {
+    const div = document.createElement('div');
+    div.className = 'log-item';
+    div.innerHTML = `<span class="log-dot"></span><p><strong>${log.user}</strong> ${log.text.replace(/^Tú\s*/, '')}</p>`;
+    logContainer.appendChild(div);
+  });
+}
+
+function saveCorporateState() {
+  try {
+    localStorage.setItem(STORAGE_KEYS.ZEN_POINTS, zenXP.toString());
+    localStorage.setItem(STORAGE_KEYS.COMPLETED_TASKS, JSON.stringify(completedTasks));
+    localStorage.setItem(STORAGE_KEYS.ACTIVITY_LOG, JSON.stringify(activityLogs));
+
+    if (supabaseClient) {
+      supabaseClient.from('user_zen_state').upsert([{
+        user_id: 'default_user',
+        zen_points: zenXP,
+        completed_tasks: completedTasks,
+        updated_at: new Date().toISOString()
+      }]).catch(err => console.warn("Supabase sync:", err));
+    }
+  } catch (e) {
+    console.error("Save state error:", e);
+  }
+}
+
+function loadSavedCorporateState() {
+  updateCorporateUI();
+  renderActivityLogs();
+
+  completedTasks.forEach(taskId => {
+    const taskCard = document.getElementById(`task-${taskId}`);
+    if (taskCard) {
+      taskCard.style.opacity = '0.6';
+      const btn = taskCard.querySelector('button');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '✅ Realizado hoy';
+        btn.className = 'btn btn-secondary btn-sm';
+      }
+    }
+  });
 }
