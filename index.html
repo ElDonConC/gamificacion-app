@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PsychoQuest & MindPulse | Plataforma Gamificada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+  <!-- HEADER & NAVIGATION -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <div class="brand-logo">
+        <span class="logo-icon">✨</span>
+      </div>
+      <div>
+        <h1 class="brand-title">PsychoQuest &middot; Suite Gamificada</h1>
+        <p class="brand-subtitle">Simulador Clínico &middot; Bienestar Corporativo MindPulse</p>
+      </div>
+    </div>
+    
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-tab active" data-tab="aula" role="tab" id="tab-aula">
+        <span class="tab-icon">🧠</span>
+        <span>Simulador Clínico TCC</span>
+      </button>
+      <button class="nav-tab" data-tab="empresa" role="tab" id="tab-empresa">
+        <span class="tab-icon">🏢</span>
+        <span>MindPulse Workspace</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="main-container">
+
+    <!-- ==================== TAB 1: SIMULADOR CLÍNICO AULA ==================== -->
+    <section id="pane-aula" class="tab-pane active" role="tabpanel">
+      <!-- Simulator Interactive Area -->
+      <div class="game-dashboard">
+        <!-- Stats Bar -->
+        <div class="game-stats-bar">
+          <div class="stat-box">
+            <span class="stat-label">Rango Clínico:</span>
+            <span class="stat-value" id="player-title">Interno Novato 🟢</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Puntos de Empatía (XP):</span>
+            <span class="stat-value text-accent" id="player-xp">0 XP</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Oportunidades Clínicas:</span>
+            <div class="lives-container" id="player-lives">
+              <span class="heart">❤️</span>
+              <span class="heart">❤️</span>
+              <span class="heart">❤️</span>
+            </div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Racha Terapéutica:</span>
+            <span class="stat-value text-gold" id="player-streak">🔥 0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Progreso de la Consulta:</span>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="game-progress" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage Screen Container -->
+        <div class="stage-card" id="stage-card">
+          <!-- Intro Screen -->
+          <div id="game-intro-view" class="game-view active">
+            <div class="mission-intro">
+              <div class="mission-badge">🎮 SIMULADOR DE INTERVENCIÓN CLÍNICA TCC</div>
+              <h2 class="mission-title">Laboratorio de Reestructuración Cognitiva</h2>
+              <p class="mission-text">
+                Bienvenido al simulador de entrenamiento clínico. Tu misión como terapeuta es evaluar los pensamientos automáticos de tres pacientes, identificar con precisión sus distorsiones cognitivas y aplicar la intervención terapéutica adecuada.
+              </p>
+
+              <div class="pedagogical-focus-grid">
+                <div class="focus-item">
+                  <span class="focus-icon">🎯</span>
+                  <div>
+                    <strong>Misión Terapéutica</strong>
+                    <p>Evalúa 3 casos reales de pacientes con síntomas de ansiedad, depresión y fobia social.</p>
+                  </div>
+                </div>
+                <div class="focus-item">
+                  <span class="focus-icon">❤️</span>
+                  <div>
+                    <strong>3 Oportunidades Clínicas</strong>
+                    <p>Cuentas con 3 vidas. Cada error te brindará retroalimentación y la opción de reintentar.</p>
+                  </div>
+                </div>
+                <div class="focus-item">
+                  <span class="focus-icon">🏆</span>
+                  <div>
+                    <strong>Acreditación Senior</strong>
+                    <p>Acumula puntos de experiencia (XP), mantén tu racha de aciertos y desbloquea insignias.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="action-row">
+                <button class="btn btn-primary btn-lg" id="btn-start-game">
+                  🚀 Iniciar Consulta Clínica
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question / Scenario Screen -->
+          <div id="game-play-view" class="game-view">
+            <div class="scenario-header">
+              <div class="scenario-counter">
+                <span class="badge" id="case-counter-badge">Caso 1 de 3</span>
+                <span class="case-patient-name" id="case-patient-name">Paciente: Martín (24 años)</span>
+              </div>
+              <div class="scenario-tag" id="case-tag">Motivo de Consulta: Ansiedad Generalizada</div>
+            </div>
+
+            <!-- Patient Dialogue Box -->
+            <div class="dialogue-box">
+              <div class="avatar-patient">🧑‍💼</div>
+              <div class="dialogue-bubble">
+                <p id="patient-quote">
+                  "Si desapruebo este examen final de psicopatología, mi carrera universitaria está arruinada para siempre y nunca conseguiré trabajo."
+                </p>
+              </div>
+            </div>
+
+            <!-- Question Prompt -->
+            <div class="question-container">
+              <h3 class="question-text" id="question-text">¿Qué distorsión cognitiva predomina en la afirmación del paciente?</h3>
+              
+              <div class="options-grid" id="options-grid">
+                <!-- Dynamically injected buttons -->
+              </div>
+            </div>
+
+            <!-- Instant Feedback Panel -->
+            <div class="feedback-panel hidden" id="feedback-panel">
+              <div class="feedback-icon" id="feedback-icon">💡</div>
+              <div class="feedback-body">
+                <h4 id="feedback-title">Análisis Clínico</h4>
+                <p id="feedback-msg">Explicación teórica aquí...</p>
+                <div class="feedback-actions">
+                  <button class="btn btn-primary" id="btn-next-question">Continuar con el siguiente caso ➡️</button>
+                  <button class="btn btn-secondary hidden" id="btn-retry-question">🔄 Reintentar Caso (Usa 1 Oportunidad)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result / Victory Screen -->
+          <div id="game-result-view" class="game-view">
+            <div class="result-box">
+              <div class="result-trophy" id="result-trophy">🏆</div>
+              <h2 class="result-title" id="result-title">¡Sesión Clínica Completada con Éxito!</h2>
+              <p class="result-desc" id="result-desc">Has demostrado un alto dominio clínico en la detección y abordaje de distorsiones de pensamiento.</p>
+
+              <div class="result-badges-grid">
+                <div class="badge-card unlocked">
+                  <span class="b-icon">🎓</span>
+                  <span class="b-name">Terapeuta TCC Acreditado</span>
+                </div>
+                <div class="badge-card unlocked">
+                  <span class="b-icon">🧠</span>
+                  <span class="b-name">Master en Reestructuración</span>
+                </div>
+                <div class="badge-card unlocked">
+                  <span class="b-icon">⭐</span>
+                  <span class="b-name">Empatía Clínica 100%</span>
+                </div>
+              </div>
+
+              <div class="final-score-row">
+                <div class="score-card">
+                  <span class="sc-label">Puntaje Final</span>
+                  <span class="sc-value" id="final-score">300 XP</span>
+                </div>
+                <div class="score-card">
+                  <span class="sc-label">Racha Máxima</span>
+                  <span class="sc-value" id="final-streak">3 🔥</span>
+                </div>
+                <div class="score-card">
+                  <span class="sc-label">Precisión Diagnóstica</span>
+                  <span class="sc-value" id="final-accuracy">100%</span>
+                </div>
+              </div>
+
+              <div class="action-row">
+                <button class="btn btn-primary" id="btn-restart-game">🔁 Realizar Otra Consulta</button>
+                <button class="btn btn-secondary" onclick="switchTab('empresa')">🏢 Ir a MindPulse Workspace ➡️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: EMPRESA WORKSPACE ==================== -->
+    <section id="pane-empresa" class="tab-pane" role="tabpanel">
+      <!-- Company Interactive Dashboard -->
+      <div class="company-showcase-grid">
+        <!-- Interactive Employee Panel -->
+        <div class="card panel-corporate">
+          <div class="card-header">
+            <h3>📱 Mi Panel de Bienestar &middot; MindPulse</h3>
+            <span class="badge badge-success">Sesión Activa</span>
+          </div>
+          <div class="card-body">
+            <div class="user-pulse-header">
+              <div class="avatar-user">👩‍💻</div>
+              <div>
+                <strong>Camila Soto</strong>
+                <div class="user-team">Rol: UX/UI Specialist &middot; Escuadra Alpha 🚀</div>
+              </div>
+              <div class="user-zen-points">
+                <span id="zen-points-display">⚡ 450 ZenXP</span>
+              </div>
+            </div>
+
+            <!-- Daily Action Tasks -->
+            <div class="action-tasks-container">
+              <h4 class="tasks-heading">🎯 Mis Desafíos Saludables de Hoy</h4>
+              
+              <div class="task-card" id="task-1">
+                <div class="task-info">
+                  <span class="task-icon">🧘</span>
+                  <div>
+                    <strong>Micro-Pausa Activa (5 min Mindfulness)</strong>
+                    <p>Desconecta la vista de la pantalla y respira conscientemente.</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline-primary btn-sm" onclick="completeCorporateTask(1, 50, 'Micro-Pausa completada (+50 ZenXP)')">
+                  Completar (+50 XP)
+                </button>
+              </div>
+
+              <div class="task-card" id="task-2">
+                <div class="task-info">
+                  <span class="task-icon">📊</span>
+                  <div>
+                    <strong>Check-in Emocional Diario</strong>
+                    <p>¿Cómo sientes tu nivel de energía y ánimo en este momento?</p>
+                  </div>
+                </div>
+                <div class="mood-selector">
+                  <button class="btn-mood" title="Motivado/a" onclick="registerMood('🔥 Motivado/a')">🔥</button>
+                  <button class="btn-mood" title="Estable" onclick="registerMood('🙂 Estable')">🙂</button>
+                  <button class="btn-mood" title="Agotado/a" onclick="registerMood('😴 Agotado/a')">😴</button>
+                  <button class="btn-mood" title="Saturado/a" onclick="registerMood('🤯 Saturado/a')">🤯</button>
+                </div>
+              </div>
+
+              <div class="task-card" id="task-3">
+                <div class="task-info">
+                  <span class="task-icon">🤝</span>
+                  <div>
+                    <strong>Kudos de Gratitud a un Colega</strong>
+                    <p>Reconoce el apoyo o buen trabajo de un compañero de equipo.</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline-primary btn-sm" onclick="completeCorporateTask(3, 40, 'Kudos enviado (+40 ZenXP)')">
+                  Enviar Kudos (+40 XP)
+                </button>
+              </div>
+            </div>
+
+            <!-- Reward Store -->
+            <div class="reward-market">
+              <h4>🎁 Catálogo de Canje de Hábitos Zen</h4>
+              <div class="reward-chips">
+                <div class="reward-chip" onclick="redeemReward('Viernes tarde libre (Tarde Chill)', 500)">
+                  <span>🏖️ Medio día libre de desconexión</span>
+                  <strong>500 ZenXP</strong>
+                </div>
+                <div class="reward-chip" onclick="redeemReward('Bono Cafetería / Snacks saludables', 200)">
+                  <span>☕ Bono Café Saludable</span>
+                  <strong>200 ZenXP</strong>
+                </div>
+                <div class="reward-chip" onclick="redeemReward('Suscripción Calm / Headspace 1 año', 350)">
+                  <span>🎧 Membresía Mindfulness Anual</span>
+                  <strong>350 ZenXP</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Corporate Team Ranking & Health Dashboard -->
+        <div class="card panel-corporate-stats">
+          <div class="card-header">
+            <h3>🏆 Ranking de Escuadras & Métricas</h3>
+            <span class="badge badge-purple">Desafío Semanal</span>
+          </div>
+          <div class="card-body">
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <span class="kpi-value text-accent">-35%</span>
+                <span class="kpi-label">Índice de Estrés Laboral</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-value text-success">94%</span>
+                <span class="kpi-label">Cumplimiento en Pausas</span>
+              </div>
+            </div>
+
+            <div class="business-mechanics-detail">
+              <h4>Tabla de Posiciones por Escuadras</h4>
+              <div class="mech-table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Puesto</th>
+                      <th>Escuadra</th>
+                      <th>Pausas Completadas</th>
+                      <th>Puntos Zen Colectivos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>🥇 1°</td>
+                      <td><strong>Escuadra Alpha (Design)</strong></td>
+                      <td>48 / 50</td>
+                      <td><span class="badge-green">3.850 ZenXP</span></td>
+                    </tr>
+                    <tr>
+                      <td>🥈 2°</td>
+                      <td><strong>Escuadra Frontend Devs</strong></td>
+                      <td>44 / 50</td>
+                      <td><span class="badge-green">3.420 ZenXP</span></td>
+                    </tr>
+                    <tr>
+                      <td>🥉 3°</td>
+                      <td><strong>Escuadra Backend & DevOps</strong></td>
+                      <td>39 / 50</td>
+                      <td><span class="badge-green">3.100 ZenXP</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="live-activity-log">
+              <h4>🔔 Registro de Actividad en Vivo</h4>
+              <div class="log-items" id="activity-log">
+                <div class="log-item">
+                  <span class="log-dot"></span>
+                  <p><strong>Tomás R.</strong> completó 5 min de meditación respiratoria. (+50 ZenXP)</p>
+                </div>
+                <div class="log-item">
+                  <span class="log-dot"></span>
+                  <p><strong>Camila S.</strong> envió un Kudo a <strong>Matías F.</strong>: "Gran soporte en el sprint".</p>
+                </div>
+                <div class="log-item">
+                  <span class="log-dot"></span>
+                  <p><strong>Escuadra Alpha</strong> desbloqueó la insignia colectiva <em>"Zen Masters 🌟"</em>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p>PsychoQuest & MindPulse Workspace &middot; Plataforma de Gamificación Interactiva</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
