@@ -2,19 +2,19 @@
 // DATA & STATE: PSYCHOQUEST & MINDPULSE SUITE (WITH HYBRID PERSISTENCE)
 // ==========================================================================
 
-// Supabase Configuration (Optional Cloud Sync + Instant LocalStorage Fallback)
+// Supabase Configuration (Official Project Integration + Local Fallback)
 const SUPABASE_CONFIG = {
-  url: window.SUPABASE_URL || 'https://xyzcompany.supabase.co', // Configurable via window.SUPABASE_URL
+  url: 'https://oeymgclqslgvrqlhruty.supabase.co',
   anonKey: 'sb_publishable_7ZurdpCSncXBeIRKy_T67A_iP1Yj0Dx'
 };
 
 let supabaseClient = null;
-if (typeof supabase !== 'undefined' && window.SUPABASE_URL) {
+if (typeof supabase !== 'undefined' && SUPABASE_CONFIG.url) {
   try {
     supabaseClient = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
-    console.log("Supabase Client initialized successfully.");
+    console.log("Supabase Client conectado exitosamente al proyecto UDD:", SUPABASE_CONFIG.url);
   } catch (e) {
-    console.warn("Supabase init error, continuing with local storage:", e);
+    console.warn("Supabase init error, continuando con almacenamiento local:", e);
   }
 }
 
