@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación VR-RESET &middot; Stand de Pausa Inmersiva | Psicología UDD</title>
+  
+  <!-- Google Fonts: Montserrat (Tipografía Oficial UDD) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Supabase JS & Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --udd-blue: #005C96;
+      --udd-blue-dark: #004370;
+      --udd-cyan: #00A9E0;
+      --udd-light: #F4F7F9;
+      --udd-dark: #1E293B;
+      --udd-text-muted: #64748B;
+      --card-bg: #FFFFFF;
+      --border-color: #E2E8F0;
+      --accent-glow: rgba(0, 169, 224, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0a192f 0%, #00365c 50%, #005C96 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 3rem 1rem;
+      color: var(--udd-dark);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    /* Header & Branding */
+    .header-card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 1.8rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      position: relative;
+      border-top: 5px solid var(--udd-cyan);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 0.8rem;
+    }
+
+    .logo-container img {
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #E0F2FE;
+      color: var(--udd-blue);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 0.8rem;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--udd-blue-dark);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--udd-text-muted);
+      line-height: 1.5;
+    }
+
+    /* Form Card */
+    .form-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 0.6rem;
+    }
+
+    .question-num {
+      background: var(--udd-blue);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .question-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.4;
+    }
+
+    .question-sublabel {
+      font-size: 0.8rem;
+      color: var(--udd-text-muted);
+      margin-left: 34px;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    /* Escala 1 al 5 */
+    .rating-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 0.8rem;
+    }
+
+    .rating-btn {
+      flex: 1;
+      height: 52px;
+      border: 2px solid var(--border-color);
+      background: #FAFAFA;
+      border-radius: 14px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--udd-dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rating-btn:hover {
+      border-color: var(--udd-cyan);
+      background: #F0F9FF;
+      transform: translateY(-2px);
+    }
+
+    .rating-btn.selected {
+      border-color: var(--udd-blue);
+      background: var(--udd-blue);
+      color: white;
+      box-shadow: 0 6px 16px rgba(0, 92, 150, 0.35);
+      transform: scale(1.04);
+    }
+
+    .rating-legends {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--udd-text-muted);
+      padding: 0 4px;
+    }
+
+    /* Radio Cards */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 0.6rem;
+    }
+
+    .radio-card {
+      border: 2px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--udd-dark);
+      background: #FAFAFA;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .radio-card:hover {
+      border-color: var(--udd-cyan);
+      background: #F0F9FF;
+    }
+
+    .radio-card.selected {
+      border-color: var(--udd-blue);
+      background: #E0F2FE;
+      color: var(--udd-blue-dark);
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0, 169, 224, 0.2);
+    }
+
+    /* Inputs de Texto */
+    textarea {
+      width: 100%;
+      border: 2px solid var(--border-color);
+      border-radius: 14px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.95rem;
+      color: #0F172A;
+      resize: vertical;
+      min-height: 85px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    textarea:focus {
+      border-color: var(--udd-blue);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    /* Botón Submit */
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--udd-blue) 0%, #0088cc 100%);
+      color: white;
+      border: none;
+      padding: 1.1rem;
+      border-radius: 14px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(0, 92, 150, 0.35);
+      transition: all 0.25s ease;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0, 92, 150, 0.45);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Mensajes */
+    .alert-box {
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 1.2rem;
+      display: none;
+      font-size: 0.9rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .alert-error {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #F87171;
+    }
+
+    /* Pantalla de Éxito */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      animation: bounce 0.6s ease;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .success-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--udd-blue-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .success-desc {
+      font-size: 0.95rem;
+      color: var(--udd-text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Institucional -->
+    <header class="header-card">
+      <div class="logo-container">
+        <img src="Psicologia.png" alt="Facultad de Psicología UDD" onerror="this.style.display='none'">
+      </div>
+      <span class="badge">Stand VR-RESET &middot; Pausa Inmersiva</span>
+      <h1 class="title">Evaluación de la Experiencia</h1>
+      <p class="subtitle">Tu opinión es fundamental para medir el impacto de esta intervención y mejorar futuras iniciativas de autocuidado universitario.</p>
+    </header>
+
+    <!-- Contenedor del Formulario -->
+    <main class="form-card">
+      <form id="evaluationForm">
+        
+        <!-- Pregunta 1 -->
+        <div class="form-group">
+          <div class="question-header">
+            <span class="question-num">1</span>
+            <label class="question-label">¿Qué tan útil te pareció la pausa inmersiva (VR-RESET) para desconectar y reducir tu fatiga mental?</label>
+          </div>
+          <span class="question-sublabel">Percepción de utilidad e impacto directo en el bienestar</span>
+          
+          <div class="rating-container" id="ratingGroup">
+            <button type="button" class="rating-btn" data-val="1">1</button>
+            <button type="button" class="rating-btn" data-val="2">2</button>
+            <button type="button" class="rating-btn" data-val="3">3</button>
+            <button type="button" class="rating-btn" data-val="4">4</button>
+            <button type="button" class="rating-btn" data-val="5">5</button>
+          </div>
+          <div class="rating-legends">
+            <span>1 (Nada útil)</span>
+            <span>5 (Muy útil)</span>
+          </div>
+          <input type="hidden" id="utilidad" name="utilidad" required>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="form-group">
+          <div class="question-header">
+            <span class="question-num">2</span>
+            <label class="question-label" for="aprendizaje">¿Qué fue lo principal que aprendiste en este stand sobre la importancia del descanso en la universidad?</label>
+          </div>
+          <span class="question-sublabel">Aprendizaje y Psicoeducación preventiva</span>
+          <textarea id="aprendizaje" name="aprendizaje" placeholder="Escribe aquí tu reflexión breve..." rows="3" required></textarea>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="form-group">
+          <div class="question-header">
+            <span class="question-num">3</span>
+            <label class="question-label">¿Crees que utilizarás el visor de cartón (Cardboard) que te regalamos para hacer pausas durante tus futuras jornadas de estudio?</label>
+          </div>
+          <span class="question-sublabel">Aplicabilidad de la herramienta y autocuidado a futuro</span>
+          
+          <div class="options-grid" id="cardboardGroup">
+            <div class="radio-card" data-val="Sí">👍 Sí</div>
+            <div class="radio-card" data-val="Tal vez">🤔 Tal vez</div>
+            <div class="radio-card" data-val="No">👎 No</div>
+          </div>
+          <input type="hidden" id="uso_cardboard" name="uso_cardboard" required>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="form-group">
+          <div class="question-header">
+            <span class="question-num">4</span>
+            <label class="question-label" for="sugerencias">¿Qué sugerirías para mejorar esta propuesta o la experiencia en nuestro stand?</label>
+          </div>
+          <span class="question-sublabel">Retroalimentación del público</span>
+          <textarea id="sugerencias" name="sugerencias" placeholder="Comentarios, ideas o sugerencias (opcional)..." rows="3"></textarea>
+        </div>
+
+        <!-- Botón Enviar -->
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span>Enviar Evaluación</span>
+          <div class="spinner" id="btnSpinner"></div>
+        </button>
+
+        <div class="alert-box alert-error" id="errorBox"></div>
+      </form>
+
+      <!-- Pantalla de Éxito al finalizar -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-icon">🎉</div>
+        <h2 class="success-title">¡Muchas gracias por participar!</h2>
+        <p class="success-desc">Tus respuestas han sido registradas con éxito. Esperamos que disfrutes tu visor Cardboard y aproveches al máximo tus pausas activas durante el semestre.</p>
+        <button type="button" class="submit-btn" style="background: var(--udd-blue); max-width: 250px; margin: 0 auto;" onclick="location.reload()">
+          Enviar otra respuesta
+        </button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      Facultad de Psicología &middot; Universidad del Desarrollo
+    </footer>
+  </div>
+
+  <script>
+    // Inicialización de Supabase con fallback local si se requiere
+    const SUPABASE_URL = "https://oeymgclqslgvrqlhruty.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_7ZurdpCSncXBeIRKy_T67A_iP1Yj0Dx";
+    let supabaseClient = null;
+
+    try {
+      if (window.supabase && SUPABASE_URL && SUPABASE_KEY) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      }
+    } catch (e) {
+      console.warn("Supabase client init warning:", e);
+    }
+
+    // Manejo de Selección: Escala 1 al 5
+    const ratingGroup = document.getElementById('ratingGroup');
+    const inputUtilidad = document.getElementById('utilidad');
+    ratingGroup.querySelectorAll('.rating-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        ratingGroup.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        inputUtilidad.value = btn.dataset.val;
+      });
+    });
+
+    // Manejo de Selección: Cardboard (Sí / No / Tal vez)
+    const cardboardGroup = document.getElementById('cardboardGroup');
+    const inputCardboard = document.getElementById('uso_cardboard');
+    cardboardGroup.querySelectorAll('.radio-card').forEach(card => {
+      card.addEventListener('click', () => {
+        cardboardGroup.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        inputCardboard.value = card.dataset.val;
+      });
+    });
+
+    // Enviar Formulario
+    const form = document.getElementById('evaluationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const errorBox = document.getElementById('errorBox');
+    const successScreen = document.getElementById('successScreen');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBox.style.display = 'none';
+
+      // Validaciones mínimas
+      if (!inputUtilidad.value) {
+        showError('Por favor selecciona una calificación del 1 al 5 en la pregunta 1.');
+        return;
+      }
+      if (!inputCardboard.value) {
+        showError('Por favor selecciona una opción en la pregunta 3 sobre el visor Cardboard.');
+        return;
+      }
+
+      const payload = {
+        utilidad: parseInt(inputUtilidad.value, 10),
+        aprendizaje: document.getElementById('aprendizaje').value.trim(),
+        uso_cardboard: inputCardboard.value,
+        sugerencias: document.getElementById('sugerencias').value.trim(),
+        created_at: new Date().toISOString()
+      };
+
+      // Estado de carga
+      submitBtn.disabled = true;
+      btnSpinner.style.display = 'inline-block';
+
+      try {
+        let savedSuccessfully = false;
+
+        if (supabaseClient) {
+          const { data, error } = await supabaseClient
+            .from('evaluaciones_stand')
+            .insert([payload]);
+
+          if (!error) {
+            savedSuccessfully = true;
+          } else {
+            console.warn('Supabase insert error, usando almacenamiento local de respaldo:', error);
+          }
+        }
+
+        // Respaldo en localStorage por si acaso
+        const savedOffline = JSON.parse(localStorage.getItem('evaluaciones_vr_reset') || '[]');
+        savedOffline.push(payload);
+        localStorage.setItem('evaluaciones_vr_reset', JSON.stringify(savedOffline));
+
+        // Celebrar con confeti
+        triggerConfetti();
+
+        // Mostrar pantalla de éxito
+        form.style.display = 'none';
+        successScreen.style.display = 'block';
+
+      } catch (err) {
+        console.error(err);
+        showError('Hubo un problema al registrar la respuesta. Por favor intenta de nuevo.');
+        submitBtn.disabled = false;
+        btnSpinner.style.display = 'none';
+      }
+    });
+
+    function showError(msg) {
+      errorBox.innerText = msg;
+      errorBox.style.display = 'block';
+    }
+
+    function triggerConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
