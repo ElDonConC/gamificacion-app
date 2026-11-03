@@ -92,6 +92,23 @@
     .btn-print:hover {
       background: #004370;
     }
+    .poster-instructions {
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 2px dashed #CBD5E1;
+      text-align: center;
+    }
+    .instructions-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #004370;
+      margin-bottom: 0.8rem;
+    }
+    .instructions-img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #E2E8F0;
+    }
     @media print {
       body { background: white; padding: 0; }
       .poster { box-shadow: none; border: 2px solid #ccc; max-width: 100%; }
@@ -107,6 +124,11 @@
     <div id="qrcode"></div>
     <div class="url-tag" id="urlText">Cargando enlace...</div>
     <button class="btn-print" onclick="window.print()">🖨️ Imprimir Cartel para el Stand</button>
+
+    <div class="poster-instructions">
+      <div class="instructions-title">👓 Instrucciones de Uso: Mini VR Box</div>
+      <img src="instrucciones_vr.jpg" alt="Instrucciones Mini VR Box" class="instructions-img">
+    </div>
   </div>
 
   <script>

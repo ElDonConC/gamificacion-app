@@ -327,6 +327,75 @@
       animation: fadeIn 0.4s ease-out;
     }
 
+    /* Tarjeta de Instrucciones del Mini VR Box */
+    .guide-box {
+      margin-top: 1.8rem;
+      background: #F8FAFC;
+      border: 2px dashed #00A9E0;
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: left;
+    }
+
+    .guide-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--udd-blue-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.8rem;
+    }
+
+    .guide-img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .guide-steps {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      list-style: none;
+    }
+
+    @media (max-width: 500px) {
+      .guide-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .guide-step-item {
+      background: white;
+      padding: 0.6rem 0.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      font-size: 0.82rem;
+      color: #334155;
+      line-height: 1.35;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .guide-num {
+      background: var(--udd-cyan);
+      color: white;
+      font-weight: 800;
+      font-size: 0.75rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
@@ -455,7 +524,34 @@
         <div class="success-icon">🎉</div>
         <h2 class="success-title">¡Muchas gracias por participar!</h2>
         <p class="success-desc">Tus respuestas han sido registradas con éxito. Esperamos que disfrutes tu mini VR Box y aproveches al máximo tus pausas activas durante el semestre.</p>
-        <button type="button" class="submit-btn" style="background: var(--udd-blue); max-width: 250px; margin: 0 auto;" onclick="location.reload()">
+        
+        <!-- Instrucciones de uso del Mini VR Box -->
+        <div class="guide-box">
+          <div class="guide-title">
+            <span>👓</span> ¿Cómo usar tu Mini VR Box?
+          </div>
+          <img src="instrucciones_vr.jpg" alt="Instrucciones Mini VR Box" class="guide-img">
+          <div class="guide-steps">
+            <div class="guide-step-item">
+              <span class="guide-num">1</span>
+              <div><strong>Run VR App:</strong> Abre un video VR o app 360° en tu smartphone (YouTube VR, etc).</div>
+            </div>
+            <div class="guide-step-item">
+              <span class="guide-num">2</span>
+              <div><strong>Unfold the VR:</strong> Despliega las alas y los lentes del mini visor hacia los lados.</div>
+            </div>
+            <div class="guide-step-item">
+              <span class="guide-num">3</span>
+              <div><strong>Placement:</strong> Coloca y ajusta el visor sobre la pantalla de tu celular.</div>
+            </div>
+            <div class="guide-step-item">
+              <span class="guide-num">4</span>
+              <div><strong>Alignment:</strong> Alinea la línea central divisoria de la pantalla con el centro del visor.</div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="submit-btn" style="background: var(--udd-blue); max-width: 250px; margin: 1.5rem auto 0 auto;" onclick="location.reload()">
           Enviar otra respuesta
         </button>
       </div>
