@@ -2,7 +2,7 @@
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;display=swap');
-      .step-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 22px; fill: #004370; }
+      .step-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; fill: #004370; }
       .step-bold { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; fill: #005C96; }
       .step-desc { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14.5px; fill: #475569; }
       .num-text { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 20px; fill: #FFFFFF; }
@@ -24,14 +24,14 @@
     </linearGradient>
   </defs>
 
-  <!-- ==================== PASO 1: Run VR App (Superior Izquierda) ==================== -->
+  <!-- ==================== PASO 1: Iniciar Video VR (Superior Izquierda) ==================== -->
   <g transform="translate(20, 20)">
     <rect width="365" height="425" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
     
     <!-- Header Paso -->
     <circle cx="48" cy="48" r="22" fill="url(#primary-grad)"/>
     <text x="48" y="55" text-anchor="middle" class="num-text">1</text>
-    <text x="82" y="56" class="step-title">Run VR App</text>
+    <text x="82" y="55" class="step-title">Iniciar Video VR</text>
     
     <!-- Ilustración Teléfono Grande -->
     <g transform="translate(48, 95)">
@@ -40,37 +40,37 @@
       <!-- Pantalla activa -->
       <rect x="12" y="12" width="246" height="151" rx="10" fill="#0F172A"/>
       
-      <!-- Lado Izquierdo (L) -->
+      <!-- Lado Izquierdo (I) -->
       <rect x="20" y="20" width="105" height="135" rx="8" fill="#1E293B" stroke="#00A9E0" stroke-width="2.5" stroke-dasharray="4,4"/>
       <path d="M 32 40 Q 72 32 112 40 Q 118 78 112 120 Q 72 130 32 120 Q 26 78 32 40 Z" fill="#00365c" opacity="0.6"/>
-      <text x="72" y="90" text-anchor="middle" class="screen-text">L</text>
+      <text x="72" y="90" text-anchor="middle" class="screen-text">I</text>
       
       <!-- Línea Divisoria Central -->
       <line x1="135" y1="12" x2="135" y2="163" stroke="#94A3B8" stroke-width="2.5" stroke-dasharray="4,4"/>
       
-      <!-- Lado Derecho (R) -->
+      <!-- Lado Derecho (D) -->
       <rect x="145" y="20" width="105" height="135" rx="8" fill="#1E293B" stroke="#00A9E0" stroke-width="2.5" stroke-dasharray="4,4"/>
       <path d="M 157 40 Q 197 32 237 40 Q 243 78 237 120 Q 197 130 157 120 Q 151 78 157 40 Z" fill="#00365c" opacity="0.6"/>
-      <text x="197" y="90" text-anchor="middle" class="screen-text">R</text>
+      <text x="197" y="90" text-anchor="middle" class="screen-text">D</text>
 
       <!-- Altavoz / Notch -->
       <circle cx="6" cy="87" r="3.5" fill="#64748B"/>
     </g>
 
-    <!-- Texto Grande y Legible -->
+    <!-- Texto en Español -->
     <text x="182" y="325" text-anchor="middle" class="step-bold">Abre tu video o app VR 360°</text>
     <text x="182" y="355" text-anchor="middle" class="step-desc">Pon la pantalla en modo dividido</text>
-    <text x="182" y="380" text-anchor="middle" class="step-desc">(formato estereoscópico L y R)</text>
+    <text x="182" y="380" text-anchor="middle" class="step-desc">(ojo Izquierdo y Derecho)</text>
   </g>
 
-  <!-- ==================== PASO 2: Unfold VR (Superior Derecha) ==================== -->
+  <!-- ==================== PASO 2: Desplegar Visor (Superior Derecha) ==================== -->
   <g transform="translate(415, 20)">
     <rect width="365" height="425" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
     
     <!-- Header Paso -->
     <circle cx="48" cy="48" r="22" fill="url(#primary-grad)"/>
     <text x="48" y="55" text-anchor="middle" class="num-text">2</text>
-    <text x="82" y="56" class="step-title">Unfold VR</text>
+    <text x="82" y="55" class="step-title">Desplegar Visor</text>
 
     <!-- Ilustración Mecánica Grande -->
     <g transform="translate(45, 95)">
@@ -105,20 +105,20 @@
       <polygon points="208,150 200,135 192,145" fill="#005C96"/>
     </g>
 
-    <!-- Texto Grande y Legible -->
-    <text x="182" y="325" text-anchor="middle" class="step-bold">Despliega el mini visor</text>
-    <text x="182" y="355" text-anchor="middle" class="step-desc">Abre las alas hacia los costados</text>
-    <text x="182" y="380" text-anchor="middle" class="step-desc">para extender ambos lentes</text>
+    <!-- Texto en Español -->
+    <text x="182" y="325" text-anchor="middle" class="step-bold">Abre el mini visor</text>
+    <text x="182" y="355" text-anchor="middle" class="step-desc">Extiende las aletas laterales</text>
+    <text x="182" y="380" text-anchor="middle" class="step-desc">para desplegar ambos lentes</text>
   </g>
 
-  <!-- ==================== PASO 3: Placement (Inferior Izquierda) ==================== -->
+  <!-- ==================== PASO 3: Colocar en Móvil (Inferior Izquierda) ==================== -->
   <g transform="translate(20, 475)">
     <rect width="365" height="425" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
     
     <!-- Header Paso -->
     <circle cx="48" cy="48" r="22" fill="url(#primary-grad)"/>
     <text x="48" y="55" text-anchor="middle" class="num-text">3</text>
-    <text x="82" y="56" class="step-title">Placement</text>
+    <text x="82" y="55" class="step-title">Colocar en Móvil</text>
 
     <!-- Ilustración Acople Smartphone Grande -->
     <g transform="translate(48, 85)">
@@ -126,7 +126,7 @@
       <rect x="0" y="55" width="270" height="125" rx="16" fill="#1E293B" stroke="#475569" stroke-width="3"/>
       <rect x="12" y="65" width="246" height="105" rx="8" fill="#0F172A"/>
 
-      <!-- Pantallas L / R tenues -->
+      <!-- Pantallas I / D tenues -->
       <rect x="22" y="73" width="105" height="89" rx="6" fill="#00365c" opacity="0.5"/>
       <rect x="143" y="73" width="105" height="89" rx="6" fill="#00365c" opacity="0.5"/>
 
@@ -147,20 +147,20 @@
       <path d="M 210 40 L 210 62 M 210 62 L 204 55 M 210 62 L 216 55" stroke="#00A9E0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
 
-    <!-- Texto Grande y Legible -->
+    <!-- Texto en Español -->
     <text x="182" y="325" text-anchor="middle" class="step-bold">Engancha al smartphone</text>
     <text x="182" y="355" text-anchor="middle" class="step-desc">Fija el clip del visor centrado</text>
     <text x="182" y="380" text-anchor="middle" class="step-desc">en el borde superior de tu pantalla</text>
   </g>
 
-  <!-- ==================== PASO 4: Alignment (Inferior Derecha) ==================== -->
+  <!-- ==================== PASO 4: Centrar y Alinear (Inferior Derecha) ==================== -->
   <g transform="translate(415, 475)">
     <rect width="365" height="425" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
     
     <!-- Header Paso -->
     <circle cx="48" cy="48" r="22" fill="url(#primary-grad)"/>
     <text x="48" y="55" text-anchor="middle" class="num-text">4</text>
-    <text x="82" y="56" class="step-title">Alignment</text>
+    <text x="82" y="55" class="step-title">Centrar y Alinear</text>
 
     <!-- Ilustración Alineación Grande -->
     <g transform="translate(48, 85)">
@@ -176,10 +176,10 @@
       <!-- Smartphone Abajo -->
       <rect x="0" y="80" width="270" height="100" rx="14" fill="#1E293B" stroke="#334155" stroke-width="3"/>
       <rect x="10" y="88" width="118" height="84" rx="6" fill="#0F172A"/>
-      <text x="69" y="138" text-anchor="middle" class="screen-text" font-size="20">L</text>
+      <text x="69" y="138" text-anchor="middle" class="screen-text" font-size="20">I</text>
 
       <rect x="142" y="88" width="118" height="84" rx="6" fill="#0F172A"/>
-      <text x="201" y="138" text-anchor="middle" class="screen-text" font-size="20">R</text>
+      <text x="201" y="138" text-anchor="middle" class="screen-text" font-size="20">D</text>
 
       <!-- Línea Guía de Alineación (Roja brillante punteada) -->
       <line x1="135" y1="0" x2="135" y2="185" stroke="#EF4444" stroke-width="3.5" stroke-dasharray="6,4"/>
@@ -189,7 +189,7 @@
       <path d="M 129 0 L 133 4 L 141 -4" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round"/>
     </g>
 
-    <!-- Texto Grande y Legible -->
+    <!-- Texto en Español -->
     <text x="182" y="325" text-anchor="middle" class="step-bold">Alinea al centro exacto</text>
     <text x="182" y="355" text-anchor="middle" class="step-desc">Haz coincidir el centro del visor</text>
     <text x="182" y="380" text-anchor="middle" class="step-desc">con la división del video</text>
