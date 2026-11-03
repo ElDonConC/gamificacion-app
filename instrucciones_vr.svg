@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&amp;display=swap');
+      .title-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 15px; fill: #004370; }
+      .desc-text { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 11.5px; fill: #64748B; }
+      .num-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; fill: #FFFFFF; }
+      .screen-text { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; fill: #00A9E0; }
+    </style>
+    
+    <!-- Sombras y gradientes -->
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+    
+    <linearGradient id="primary-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#005C96"/>
+      <stop offset="100%" stop-color="#00365c"/>
+    </linearGradient>
+
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A9E0"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo General -->
+  <rect width="1000" height="360" rx="20" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- ==================== PASO 1: Run VR App ==================== -->
+  <g transform="translate(25, 20)">
+    <!-- Tarjeta fondo -->
+    <rect width="220" height="320" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    
+    <!-- Badge Número -->
+    <circle cx="36" cy="36" r="16" fill="url(#primary-grad)"/>
+    <text x="36" y="41" text-anchor="middle" class="num-text">1</text>
+    <text x="62" y="42" class="title-text">Run VR App</text>
+    
+    <!-- Ilustración Teléfono en modo VR Split -->
+    <g transform="translate(25, 75)">
+      <!-- Cuerpo Smartphone horizontal -->
+      <rect x="0" y="0" width="170" height="110" rx="14" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+      <!-- Pantalla interna -->
+      <rect x="8" y="8" width="154" height="94" rx="8" fill="#0F172A"/>
+      
+      <!-- Lado Izquierdo (L) -->
+      <rect x="14" y="14" width="67" height="82" rx="6" fill="#1E293B" stroke="#00A9E0" stroke-width="1.5" stroke-dasharray="2,2"/>
+      <!-- Lente simulación ojo izq -->
+      <path d="M 22 30 Q 47 24 72 30 Q 76 55 72 80 Q 47 86 22 80 Q 18 55 22 30 Z" fill="#00365c" opacity="0.6"/>
+      <text x="47" y="60" text-anchor="middle" class="screen-text">L</text>
+      
+      <!-- Línea Divisoria Central -->
+      <line x1="85" y1="8" x2="85" y2="102" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3,3"/>
+      
+      <!-- Lado Derecho (R) -->
+      <rect x="89" y="14" width="67" height="82" rx="6" fill="#1E293B" stroke="#00A9E0" stroke-width="1.5" stroke-dasharray="2,2"/>
+      <path d="M 97 30 Q 122 24 147 30 Q 151 55 147 80 Q 122 86 97 80 Q 93 55 97 30 Z" fill="#00365c" opacity="0.6"/>
+      <text x="122" y="60" text-anchor="middle" class="screen-text">R</text>
+      
+      <!-- Cámara / Notch lateral -->
+      <circle cx="4" cy="55" r="2.5" fill="#64748B"/>
+    </g>
+
+    <!-- Descripción -->
+    <text x="110" y="240" text-anchor="middle" class="desc-text" font-weight="700" fill="#005C96">Abre tu video o app 360°</text>
+    <text x="110" y="260" text-anchor="middle" class="desc-text">Inicia el modo pantalla dividida</text>
+    <text x="110" y="278" text-anchor="middle" class="desc-text">(formato estereoscópico L/R)</text>
+  </g>
+
+  <!-- ==================== PASO 2: Unfold the VR ==================== -->
+  <g transform="translate(265, 20)">
+    <!-- Tarjeta fondo -->
+    <rect width="220" height="320" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    
+    <!-- Badge Número -->
+    <circle cx="36" cy="36" r="16" fill="url(#primary-grad)"/>
+    <text x="36" y="41" text-anchor="middle" class="num-text">2</text>
+    <text x="62" y="42" class="title-text">Unfold VR</text>
+
+    <!-- Ilustración Despliegue de los Lentes -->
+    <g transform="translate(30, 80)">
+      <!-- Eje Central / Bisagra -->
+      <rect x="73" y="10" width="14" height="95" rx="7" fill="#005C96"/>
+      <circle cx="80" cy="20" r="5" fill="#00A9E0"/>
+      <circle cx="80" cy="95" r="5" fill="#00A9E0"/>
+      
+      <!-- Brazo Izquierdo Abriéndose (Ángulo) -->
+      <g transform="rotate(-30 80 20)">
+        <rect x="5" y="14" width="75" height="18" rx="6" fill="#00A9E0" opacity="0.9"/>
+        <circle cx="28" cy="23" r="10" fill="#FFFFFF" stroke="#00365c" stroke-width="2"/>
+        <path d="M 5 32 L 20 70 L 60 70 L 75 32 Z" fill="#E2E8F0" opacity="0.6"/>
+      </g>
+      
+      <!-- Brazo Derecho Abriéndose (Ángulo) -->
+      <g transform="rotate(30 80 20)">
+        <rect x="80" y="14" width="75" height="18" rx="6" fill="#00A9E0" opacity="0.9"/>
+        <circle cx="132" cy="23" r="10" fill="#FFFFFF" stroke="#00365c" stroke-width="2"/>
+        <path d="M 85 32 L 100 70 L 140 70 L 155 32 Z" fill="#E2E8F0" opacity="0.6"/>
+      </g>
+      
+      <!-- Flechas de Giro dinámicas -->
+      <path d="M 40 85 Q 55 105 70 98" fill="none" stroke="#005C96" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="36,88 40,78 46,85" fill="#005C96"/>
+
+      <path d="M 120 85 Q 105 105 90 98" fill="none" stroke="#005C96" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="124,88 114,85 120,78" fill="#005C96"/>
+    </g>
+
+    <!-- Descripción -->
+    <text x="110" y="240" text-anchor="middle" class="desc-text" font-weight="700" fill="#005C96">Despliega el mini visor</text>
+    <text x="110" y="260" text-anchor="middle" class="desc-text">Abre las aletas laterales</text>
+    <text x="110" y="278" text-anchor="middle" class="desc-text">y libera ambos lentes</text>
+  </g>
+
+  <!-- ==================== PASO 3: Placement ==================== -->
+  <g transform="translate(505, 20)">
+    <!-- Tarjeta fondo -->
+    <rect width="220" height="320" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    
+    <!-- Badge Número -->
+    <circle cx="36" cy="36" r="16" fill="url(#primary-grad)"/>
+    <text x="36" y="41" text-anchor="middle" class="num-text">3</text>
+    <text x="62" y="42" class="title-text">Placement</text>
+
+    <!-- Ilustración Acoplar Visor al Teléfono -->
+    <g transform="translate(30, 75)">
+      <!-- Smartphone de base horizontal -->
+      <rect x="5" y="35" width="150" height="85" rx="12" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+      <rect x="12" y="42" width="136" height="71" rx="6" fill="#0F172A"/>
+      
+      <!-- Pantalla dividida sugerida -->
+      <rect x="18" y="47" width="58" height="61" rx="4" fill="#00365c" opacity="0.4"/>
+      <rect x="84" y="47" width="58" height="61" rx="4" fill="#00365c" opacity="0.4"/>
+
+      <!-- Mini VR Box acoplándose desde arriba / clip -->
+      <g transform="translate(18, 0)">
+        <!-- Clip de soporte superior -->
+        <path d="M 62 20 L 62 38" stroke="#00A9E0" stroke-width="4" stroke-linecap="round"/>
+        <!-- Montura de lentes -->
+        <rect x="0" y="10" width="124" height="26" rx="8" fill="#005C96" stroke="#00A9E0" stroke-width="2"/>
+        <circle cx="34" cy="23" r="9" fill="#E0F2FE" stroke="#FFFFFF" stroke-width="2"/>
+        <circle cx="90" cy="23" r="9" fill="#E0F2FE" stroke="#FFFFFF" stroke-width="2"/>
+      </g>
+      
+      <!-- Flechas de colocación hacia abajo -->
+      <g fill="#00A9E0">
+        <path d="M 38 28 L 38 42 M 38 42 L 34 38 M 38 42 L 42 38" stroke="#00A9E0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 122 28 L 122 42 M 122 42 L 118 38 M 122 42 L 126 38" stroke="#00A9E0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </g>
+
+    <!-- Descripción -->
+    <text x="110" y="240" text-anchor="middle" class="desc-text" font-weight="700" fill="#005C96">Engancha al smartphone</text>
+    <text x="110" y="260" text-anchor="middle" class="desc-text">Fija el clip del visor centrado</text>
+    <text x="110" y="278" text-anchor="middle" class="desc-text">en el borde superior de tu móvil</text>
+  </g>
+
+  <!-- ==================== PASO 4: Alignment ==================== -->
+  <g transform="translate(745, 20)">
+    <!-- Tarjeta fondo -->
+    <rect width="230" height="320" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    
+    <!-- Badge Número -->
+    <circle cx="36" cy="36" r="16" fill="url(#primary-grad)"/>
+    <text x="36" y="41" text-anchor="middle" class="num-text">4</text>
+    <text x="62" y="42" class="title-text">Alignment</text>
+
+    <!-- Ilustración Alineación perfecta -->
+    <g transform="translate(35, 75)">
+      <!-- Silueta Visor Superior -->
+      <g transform="translate(10, 0)">
+        <path d="M 0 15 Q 70 0 140 15 Q 120 45 70 35 Q 20 45 0 15 Z" fill="#005C96" opacity="0.95"/>
+        <circle cx="38" cy="20" r="14" fill="#FFFFFF" stroke="#00A9E0" stroke-width="3"/>
+        <circle cx="38" cy="20" r="8" fill="#E0F2FE"/>
+        <circle cx="102" cy="20" r="14" fill="#FFFFFF" stroke="#00A9E0" stroke-width="3"/>
+        <circle cx="102" cy="20" r="8" fill="#E0F2FE"/>
+      </g>
+
+      <!-- Pantalla del celular abajo -->
+      <rect x="5" y="48" width="150" height="72" rx="10" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+      
+      <!-- Celdas L y R -->
+      <rect x="12" y="54" width="66" height="60" rx="4" fill="#0F172A"/>
+      <text x="45" y="90" text-anchor="middle" class="screen-text" font-size="13">L</text>
+
+      <rect x="82" y="54" width="66" height="60" rx="4" fill="#0F172A"/>
+      <text x="115" y="90" text-anchor="middle" class="screen-text" font-size="13">R</text>
+
+      <!-- Eje Central de Alineación (Rayas Rojas/Cian Guía) -->
+      <line x1="80" y1="2" x2="80" y2="124" stroke="#EF4444" stroke-width="2" stroke-dasharray="4,3"/>
+      <!-- Icono de Check de alineación -->
+      <circle cx="80" cy="2" r="7" fill="#10B981"/>
+      <path d="M 77 2 L 79 4 L 83 0" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <!-- Descripción -->
+    <text x="115" y="240" text-anchor="middle" class="desc-text" font-weight="700" fill="#005C96">Alinea el centro</text>
+    <text x="115" y="260" text-anchor="middle" class="desc-text">Haz coincidir la línea media</text>
+    <text x="115" y="278" text-anchor="middle" class="desc-text">y ¡disfruta tu pausa VR!</text>
+  </g>
+</svg>
