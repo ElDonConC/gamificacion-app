@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Estadístico &middot; VR-RESET Stand | Psicología UDD</title>
+  
+  <!-- Montserrat Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Chart.js & Supabase Client -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root {
+      --udd-blue: #005C96;
+      --udd-blue-dark: #00365c;
+      --udd-cyan: #00A9E0;
+      --udd-bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: var(--udd-bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, var(--udd-blue-dark) 0%, var(--udd-blue) 100%);
+      color: white;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-brand img {
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: #BAE6FD;
+      font-weight: 500;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      background: white;
+      color: var(--udd-blue);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #E0F2FE;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+    }
+
+    .hero-panel {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .hero-text h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--udd-blue-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-text p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #ECFDF5;
+      color: #065F46;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border: 1px solid #A7F3D0;
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: #10B981;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--udd-cyan);
+    }
+
+    .kpi-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .kpi-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--udd-blue-dark);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .kpi-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    /* Chart Grid */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chart-card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.6rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .chart-header {
+      margin-bottom: 1.2rem;
+    }
+
+    .chart-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--udd-blue-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .chart-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .canvas-wrap {
+      position: relative;
+      height: 260px;
+      width: 100%;
+    }
+
+    /* Respuestas cualitativas / Tabla */
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 850px) {
+      .feedback-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .list-card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.6rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      max-height: 480px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .list-header {
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid #F1F5F9;
+    }
+
+    .list-content {
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 6px;
+    }
+
+    .list-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .list-content::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 10px;
+    }
+
+    .quote-item {
+      background: #F8FAFC;
+      border-left: 4px solid var(--udd-blue);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: #334155;
+    }
+
+    .quote-item.alt {
+      border-left-color: var(--udd-cyan);
+    }
+
+    .quote-time {
+      font-size: 0.72rem;
+      color: #94A3B8;
+      margin-top: 4px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: white;
+      border-top: 1px solid var(--border-color);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    @media print {
+      .navbar .nav-actions, .live-indicator, .btn {
+        display: none !important;
+      }
+      body {
+        background: white;
+      }
+      .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .kpi-card, .chart-card, .list-card, .hero-panel {
+        box-shadow: none !important;
+        border: 1px solid #CBD5E1 !important;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Navegación -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <img src="Psicologia.png" alt="Facultad de Psicología UDD" onerror="this.style.display='none'">
+      <div>
+        <div class="brand-title">VR-RESET &middot; Tablero Estadístico</div>
+        <div class="brand-sub">Evaluación del Stand de Pausa Inmersiva y Psicoeducación UDD</div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-secondary" onclick="fetchData()">🔄 Actualizar Datos</button>
+      <button class="btn btn-secondary" onclick="exportCSV()">📥 Exportar CSV</button>
+      <button class="btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
+      <a href="evaluacion.html" class="btn" target="_blank">📋 Ver Formulario</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    
+    <!-- Hero / Banner Resumen -->
+    <header class="hero-panel">
+      <div class="hero-text">
+        <h2>Resultados de Impacto y Aceptación</h2>
+        <p>Métricas consolidadas a partir de las evaluaciones recibidas en tiempo real desde el stand. Diseñado para la presentación del proyecto de innovación psicológica.</p>
+      </div>
+      <div class="live-indicator">
+        <span class="pulse-dot"></span>
+        <span id="liveStatus">Conectado a Supabase en Vivo</span>
+      </div>
+    </header>
+
+    <!-- Indicadores Clave (KPIs) -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">Muestra Total</div>
+        <div class="kpi-value" id="kpiTotal">0 <span style="font-size: 1rem; font-weight: 500; color: #64748B;">participantes</span></div>
+        <div class="kpi-sub">Evaluaciones registradas en el stand</div>
+      </div>
+      
+      <div class="kpi-card">
+        <div class="kpi-title">Percepción de Utilidad</div>
+        <div class="kpi-value" id="kpiRating">0.0 <span style="font-size: 1.1rem; color: #F59E0B;">★</span></div>
+        <div class="kpi-sub">Promedio sobre escala de 1 a 5</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">Intención de Uso Futuro</div>
+        <div class="kpi-value" id="kpiAdoption">0%</div>
+        <div class="kpi-sub">Estudiantes dispuestos a usar mini VR Box</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">Satisfacción Alta (4 o 5)</div>
+        <div class="kpi-value" id="kpiSatisfaction">0%</div>
+        <div class="kpi-sub">% que consideró la pausa Muy o Bastante Útil</div>
+      </div>
+    </section>
+
+    <!-- Gráficos -->
+    <section class="charts-grid">
+      <!-- Gráfico 1: Utilidad de la Pausa (1 a 5) -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">1. Percepción de Utilidad (Escala 1 a 5)</div>
+          <div class="chart-subtitle">¿Qué tan útil pareció la pausa para desconectar y reducir fatiga mental?</div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="chartUtilidad"></canvas>
+        </div>
+      </div>
+
+      <!-- Gráfico 2: Intención de uso mini VR Box -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">2. Intención de Uso: Mini VR Box</div>
+          <div class="chart-subtitle">¿Utilizarán el mini VR Box para pausas en futuras jornadas de estudio?</div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="chartCardboard"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preguntas Cualitativas -->
+    <section class="feedback-grid">
+      <!-- Columna 1: Aprendizajes Psicoeducativos -->
+      <div class="list-card">
+        <div class="list-header">
+          <h3 class="chart-title">🧠 Aprendizaje y Psicoeducación</h3>
+          <p class="chart-subtitle">Lo principal que aprendieron sobre la importancia del descanso</p>
+        </div>
+        <div class="list-content" id="listAprendizaje">
+          <div class="empty-state">Esperando respuestas...</div>
+        </div>
+      </div>
+
+      <!-- Columna 2: Sugerencias y Retroalimentación -->
+      <div class="list-card">
+        <div class="list-header">
+          <h3 class="chart-title">💬 Retroalimentación y Sugerencias</h3>
+          <p class="chart-subtitle">Propuestas de mejora recibidas para el stand y la experiencia</p>
+        </div>
+        <div class="list-content" id="listSugerencias">
+          <div class="empty-state">Esperando sugerencias...</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    Facultad de Psicología &middot; Universidad del Desarrollo &middot; Proyecto VR-RESET 2026
+  </footer>
+
+  <script>
+    const SUPABASE_URL = "https://oeymgclqslgvrqlhruty.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_7ZurdpCSncXBeIRKy_T67A_iP1Yj0Dx";
+    let supabaseClient = null;
+    let cachedData = [];
+
+    let chartUtilidadInstance = null;
+    let chartCardboardInstance = null;
+
+    try {
+      if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      }
+    } catch(e) {
+      console.warn("Error conectando con Supabase:", e);
+    }
+
+    async function fetchData() {
+      let rawData = [];
+      const liveStatus = document.getElementById('liveStatus');
+
+      try {
+        if (supabaseClient) {
+          const { data, error } = await supabaseClient
+            .from('evaluaciones_stand')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+          if (!error && data && data.length > 0) {
+            rawData = data;
+            liveStatus.innerText = `En vivo: ${data.length} respuestas`;
+          }
+        }
+      } catch (err) {
+        console.warn('Error fetching Supabase:', err);
+      }
+
+      // Si no hay datos en Supabase, revisar localStorage
+      if (rawData.length === 0) {
+        const local = localStorage.getItem('evaluaciones_vr_reset');
+        if (local) {
+          try {
+            rawData = JSON.parse(local);
+            liveStatus.innerText = `Datos locales (${rawData.length})`;
+          } catch(e){}
+        }
+      }
+
+      cachedData = rawData;
+      renderDashboard(rawData);
+    }
+
+    function renderDashboard(data) {
+      const total = data.length;
+      document.getElementById('kpiTotal').innerHTML = `${total} <span style="font-size: 1rem; font-weight: 500; color: #64748B;">participantes</span>`;
+
+      if (total === 0) {
+        document.getElementById('kpiRating').innerText = "0.0";
+        document.getElementById('kpiAdoption').innerText = "0%";
+        document.getElementById('kpiSatisfaction').innerText = "0%";
+        renderEmptyCharts();
+        return;
+      }
+
+      // 1. Promedio utilidad y satisfacción
+      const ratings = data.map(d => parseInt(d.utilidad, 10) || 0).filter(r => r > 0);
+      const sum = ratings.reduce((acc, curr) => acc + curr, 0);
+      const avg = ratings.length ? (sum / ratings.length).toFixed(1) : "0.0";
+      document.getElementById('kpiRating').innerHTML = `${avg} <span style="font-size: 1.1rem; color: #F59E0B;">★</span>`;
+
+      const highSat = ratings.filter(r => r >= 4).length;
+      const pctSat = ratings.length ? Math.round((highSat / ratings.length) * 100) : 0;
+      document.getElementById('kpiSatisfaction').innerText = `${pctSat}%`;
+
+      // 2. Intención uso VR Box
+      const vrYes = data.filter(d => (d.uso_cardboard || '').toLowerCase() === 'sí').length;
+      const pctAdoption = Math.round((vrYes / total) * 100);
+      document.getElementById('kpiAdoption').innerText = `${pctAdoption}%`;
+
+      // 3. Render gráficos
+      renderChartUtilidad(data);
+      renderChartCardboard(data);
+
+      // 4. Render listas cualitativas
+      renderLists(data);
+    }
+
+    function renderChartUtilidad(data) {
+      const counts = [0, 0, 0, 0, 0]; // 1, 2, 3, 4, 5
+      data.forEach(d => {
+        const u = parseInt(d.utilidad, 10);
+        if (u >= 1 && u <= 5) counts[u - 1]++;
+      });
+
+      const ctx = document.getElementById('chartUtilidad').getContext('2d');
+      if (chartUtilidadInstance) chartUtilidadInstance.destroy();
+
+      chartUtilidadInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['1 (Nada)', '2 (Poco)', '3 (Moderado)', '4 (Útil)', '5 (Muy útil)'],
+          datasets: [{
+            label: 'Respuestas',
+            data: counts,
+            backgroundColor: [
+              '#CBD5E1',
+              '#94A3B8',
+              '#60A5FA',
+              '#00A9E0',
+              '#005C96'
+            ],
+            borderRadius: 8,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1, precision: 0 }
+            }
+          }
+        }
+      });
+    }
+
+    function renderChartCardboard(data) {
+      let yes = 0, maybe = 0, no = 0;
+      data.forEach(d => {
+        const v = (d.uso_cardboard || '').toLowerCase();
+        if (v === 'sí') yes++;
+        else if (v === 'tal vez') maybe++;
+        else if (v === 'no') no++;
+      });
+
+      const ctx = document.getElementById('chartCardboard').getContext('2d');
+      if (chartCardboardInstance) chartCardboardInstance.destroy();
+
+      chartCardboardInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Sí', 'Tal vez', 'No'],
+          datasets: [{
+            data: [yes, maybe, no],
+            backgroundColor: ['#005C96', '#00A9E0', '#94A3B8'],
+            borderWidth: 2,
+            borderColor: '#FFFFFF'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { font: { family: 'Montserrat', weight: 600 } }
+            }
+          },
+          cutout: '65%'
+        }
+      });
+    }
+
+    function renderEmptyCharts() {
+      if (chartUtilidadInstance) chartUtilidadInstance.destroy();
+      if (chartCardboardInstance) chartCardboardInstance.destroy();
+      document.getElementById('listAprendizaje').innerHTML = '<div class="empty-state">No hay respuestas registradas aún.</div>';
+      document.getElementById('listSugerencias').innerHTML = '<div class="empty-state">No hay sugerencias registradas aún.</div>';
+    }
+
+    function renderLists(data) {
+      const containerAprendizaje = document.getElementById('listAprendizaje');
+      const containerSugerencias = document.getElementById('listSugerencias');
+
+      const aprendizajes = data.filter(d => d.aprendizaje && d.aprendizaje.trim() !== '');
+      if (aprendizajes.length === 0) {
+        containerAprendizaje.innerHTML = '<div class="empty-state">Aún no hay respuestas de aprendizaje registradas.</div>';
+      } else {
+        containerAprendizaje.innerHTML = aprendizajes.map(d => `
+          <div class="quote-item">
+            "${escapeHTML(d.aprendizaje)}"
+            <span class="quote-time">${formatDate(d.created_at)} &middot; Calificación: ${d.utilidad || '-'}★</span>
+          </div>
+        `).join('');
+      }
+
+      const sugerencias = data.filter(d => d.sugerencias && d.sugerencias.trim() !== '');
+      if (sugerencias.length === 0) {
+        containerSugerencias.innerHTML = '<div class="empty-state">Aún no hay sugerencias registradas.</div>';
+      } else {
+        containerSugerencias.innerHTML = sugerencias.map(d => `
+          <div class="quote-item alt">
+            "${escapeHTML(d.sugerencias)}"
+            <span class="quote-time">${formatDate(d.created_at)}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    function escapeHTML(str) {
+      return (str || '').replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    function formatDate(isoStr) {
+      if (!isoStr) return '';
+      try {
+        const d = new Date(isoStr);
+        return d.toLocaleDateString('es-CL', { hour: '2-digit', minute: '2-digit' });
+      } catch(e) {
+        return '';
+      }
+    }
+
+    function exportCSV() {
+      if (!cachedData || cachedData.length === 0) {
+        alert("No hay datos para exportar.");
+        return;
+      }
+      const headers = ["ID", "Utilidad (1-5)", "Aprendizaje", "Uso Mini VR Box", "Sugerencias", "Fecha"];
+      const rows = cachedData.map(d => [
+        d.id || "",
+        d.utilidad || "",
+        `"${(d.aprendizaje || '').replace(/"/g, '""')}"`,
+        `"${(d.uso_cardboard || '').replace(/"/g, '""')}"`,
+        `"${(d.sugerencias || '').replace(/"/g, '""')}"`,
+        d.created_at || ""
+      ]);
+
+      const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `Evaluaciones_VR_RESET_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Carga inicial y auto-refresco cada 15 segundos
+    window.addEventListener('DOMContentLoaded', () => {
+      fetchData();
+      setInterval(fetchData, 15000);
+    });
+  </script>
+</body>
+</html>
