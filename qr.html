@@ -6,7 +6,7 @@
   <title>Código QR &middot; Evaluación VR-RESET UDD</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     * {
@@ -27,95 +27,96 @@
     }
     .poster {
       background: white;
-      border-radius: 20px;
-      padding: 1.8rem 2rem;
+      border-radius: 24px;
+      padding: 2.2rem 2.4rem;
       width: 100%;
-      max-width: 680px;
+      max-width: 800px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      border-top: 8px solid #00A9E0;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+      border-top: 10px solid #00A9E0;
     }
     .badge {
       display: inline-block;
       background: #E0F2FE;
       color: #005C96;
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.82rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 5px 14px;
+      letter-spacing: 1.2px;
+      padding: 6px 18px;
       border-radius: 50px;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.8rem;
     }
     h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
+      font-size: 1.9rem;
+      font-weight: 900;
       color: #004370;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
     }
     p {
       color: #64748B;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
     }
     #qrcode {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 auto 0.8rem auto;
-      padding: 10px;
+      margin: 0 auto 1rem auto;
+      padding: 14px;
       background: white;
-      border: 2px solid #E2E8F0;
-      border-radius: 14px;
+      border: 3px solid #E2E8F0;
+      border-radius: 18px;
       width: fit-content;
     }
     .url-tag {
-      font-size: 0.78rem;
+      font-size: 0.85rem;
       color: #005C96;
-      font-weight: 600;
+      font-weight: 700;
       word-break: break-all;
       background: #F1F5F9;
-      padding: 6px 12px;
-      border-radius: 8px;
-      margin-bottom: 0.8rem;
+      padding: 8px 16px;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
     }
     .btn-print {
       background: #005C96;
       color: white;
       border: none;
-      padding: 0.7rem 1.4rem;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.88rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
     .btn-print:hover {
       background: #004370;
+      transform: translateY(-1px);
     }
     .poster-instructions {
-      margin-top: 1.2rem;
-      padding-top: 1rem;
+      margin-top: 1.6rem;
+      padding-top: 1.4rem;
       border-top: 2px dashed #CBD5E1;
       text-align: center;
     }
     .instructions-title {
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 1.15rem;
+      font-weight: 800;
       color: #004370;
-      margin-bottom: 0.6rem;
+      margin-bottom: 1rem;
     }
     .instructions-img {
       width: 100%;
-      border-radius: 10px;
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      border-radius: 14px;
+      border: 1.5px solid #E2E8F0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
 
-    /* Reglas estrictas para impresión en 1 sola página (A4 / Carta) */
+    /* Reglas estrictas para aprovechar al máximo TODO el espacio vertical de 1 página A4 / Carta */
     @page {
-      size: auto;
-      margin: 8mm 10mm;
+      size: letter portrait;
+      margin: 6mm 8mm;
     }
 
     @media print {
@@ -129,58 +130,63 @@
       .poster {
         box-shadow: none !important;
         border: 2px solid #005C96 !important;
-        border-top: 6px solid #00A9E0 !important;
+        border-top: 8px solid #00A9E0 !important;
         max-width: 100% !important;
         width: 100% !important;
-        padding: 12px 18px !important;
+        height: 98vh !important;
+        padding: 16px 20px !important;
         margin: 0 auto !important;
         page-break-inside: avoid !important;
         break-inside: avoid !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
       }
       .badge {
-        margin-bottom: 4px !important;
-        padding: 3px 10px !important;
-        font-size: 0.68rem !important;
+        margin-bottom: 6px !important;
+        padding: 4px 12px !important;
+        font-size: 0.75rem !important;
       }
       h1 {
-        font-size: 1.3rem !important;
-        margin-bottom: 2px !important;
+        font-size: 1.6rem !important;
+        margin-bottom: 4px !important;
       }
       p {
-        font-size: 0.82rem !important;
-        margin-bottom: 6px !important;
+        font-size: 0.92rem !important;
+        margin-bottom: 8px !important;
       }
       #qrcode {
-        padding: 6px !important;
-        margin-bottom: 6px !important;
-        border-width: 1.5px !important;
+        padding: 8px !important;
+        margin-bottom: 8px !important;
+        border-width: 2px !important;
       }
       #qrcode canvas, #qrcode img {
-        width: 140px !important;
-        height: 140px !important;
+        width: 190px !important;
+        height: 190px !important;
       }
       .url-tag {
-        font-size: 0.72rem !important;
-        padding: 4px 8px !important;
-        margin-bottom: 6px !important;
+        font-size: 0.78rem !important;
+        padding: 5px 10px !important;
+        margin-bottom: 8px !important;
       }
       .btn-print {
         display: none !important;
       }
       .poster-instructions {
-        margin-top: 6px !important;
-        padding-top: 6px !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
+        margin-top: 10px !important;
+        padding-top: 10px !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
       }
       .instructions-title {
-        font-size: 0.82rem !important;
-        margin-bottom: 4px !important;
+        font-size: 1rem !important;
+        margin-bottom: 8px !important;
       }
       .instructions-img {
-        max-height: 230px !important;
-        width: auto !important;
-        max-width: 100% !important;
+        width: 100% !important;
+        max-height: 420px !important;
         object-fit: contain !important;
         margin: 0 auto !important;
         display: block !important;
@@ -190,12 +196,14 @@
 </head>
 <body>
   <div class="poster">
-    <span class="badge">Stand VR-RESET &middot; Pausa Activa</span>
-    <h1>¡Evalúa tu Experiencia!</h1>
-    <p>Escanea este código con tu celular y ayúdanos respondiendo 4 preguntas breves.</p>
-    <div id="qrcode"></div>
-    <div class="url-tag" id="urlText">Cargando enlace...</div>
-    <button class="btn-print" onclick="window.print()">🖨️ Imprimir Cartel para el Stand</button>
+    <div class="poster-top">
+      <span class="badge">Stand VR-RESET &middot; Pausa Activa</span>
+      <h1>¡Evalúa tu Experiencia!</h1>
+      <p>Escanea este código con tu celular y ayúdanos respondiendo 4 preguntas breves.</p>
+      <div id="qrcode"></div>
+      <div class="url-tag" id="urlText">Cargando enlace...</div>
+      <button class="btn-print" onclick="window.print()">🖨️ Imprimir Cartel para el Stand</button>
+    </div>
 
     <div class="poster-instructions">
       <div class="instructions-title">👓 Instrucciones de Uso: Mini VR Box</div>
@@ -209,8 +217,8 @@
 
     new QRCode(document.getElementById("qrcode"), {
       text: repoPagesUrl,
-      width: 180,
-      height: 180,
+      width: 200,
+      height: 200,
       colorDark : "#00365c",
       colorLight : "#ffffff",
       correctLevel : QRCode.CorrectLevel.H
