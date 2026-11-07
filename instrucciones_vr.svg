@@ -1,197 +1,184 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 920" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 290" width="100%" height="100%">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&amp;display=swap');
-      .step-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; fill: #004370; }
-      .step-bold { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; fill: #005C96; }
-      .step-desc { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14.5px; fill: #475569; }
-      .num-text { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 20px; fill: #FFFFFF; }
-      .screen-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 24px; fill: #00A9E0; }
+      .step-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14.5px; fill: #004370; }
+      .step-bold { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11.5px; fill: #005C96; }
+      .step-desc { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 10.5px; fill: #475569; }
+      .num-text { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 13px; fill: #FFFFFF; }
+      .screen-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 16px; fill: #00A9E0; }
     </style>
     
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.07"/>
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000000" flood-opacity="0.06"/>
     </filter>
 
     <linearGradient id="primary-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#005C96"/>
       <stop offset="100%" stop-color="#00365c"/>
     </linearGradient>
-
-    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00A9E0"/>
-      <stop offset="100%" stop-color="#0284C7"/>
-    </linearGradient>
   </defs>
 
-  <!-- ==================== PASO 1: Iniciar Video VR (Superior Izquierda) ==================== -->
-  <g transform="translate(20, 20)">
-    <rect width="365" height="425" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
+  <!-- ==================== PASO 1: Iniciar Video VR ==================== -->
+  <g transform="translate(15, 10)">
+    <rect width="230" height="268" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
     
     <!-- Header Paso -->
-    <circle cx="48" cy="48" r="22" fill="url(#primary-grad)"/>
-    <text x="48" y="55" text-anchor="middle" class="num-text">1</text>
-    <text x="82" y="55" class="step-title">Iniciar Video VR</text>
+    <circle cx="30" cy="30" r="14" fill="url(#primary-grad)"/>
+    <text x="30" y="35" text-anchor="middle" class="num-text">1</text>
+    <text x="54" y="35" class="step-title">Iniciar Video VR</text>
     
-    <!-- Ilustración Teléfono Grande -->
-    <g transform="translate(48, 95)">
-      <!-- Smartphone -->
-      <rect x="0" y="0" width="270" height="175" rx="18" fill="#1E293B" stroke="#334155" stroke-width="3"/>
-      <!-- Pantalla activa -->
-      <rect x="12" y="12" width="246" height="151" rx="10" fill="#0F172A"/>
+    <!-- Ilustración Teléfono -->
+    <g transform="translate(25, 58)">
+      <rect x="0" y="0" width="180" height="115" rx="12" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+      <rect x="8" y="8" width="164" height="99" rx="7" fill="#0F172A"/>
       
-      <!-- Lado Izquierdo (I) -->
-      <rect x="20" y="20" width="105" height="135" rx="8" fill="#1E293B" stroke="#00A9E0" stroke-width="2.5" stroke-dasharray="4,4"/>
-      <path d="M 32 40 Q 72 32 112 40 Q 118 78 112 120 Q 72 130 32 120 Q 26 78 32 40 Z" fill="#00365c" opacity="0.6"/>
-      <text x="72" y="90" text-anchor="middle" class="screen-text">I</text>
+      <!-- Ojo Izquierdo -->
+      <rect x="14" y="14" width="70" height="87" rx="5" fill="#1E293B" stroke="#00A9E0" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <path d="M 22 28 Q 49 22 76 28 Q 80 53 76 81 Q 49 88 22 81 Q 18 53 22 28 Z" fill="#00365c" opacity="0.6"/>
+      <text x="49" y="60" text-anchor="middle" class="screen-text">I</text>
       
-      <!-- Línea Divisoria Central -->
-      <line x1="135" y1="12" x2="135" y2="163" stroke="#94A3B8" stroke-width="2.5" stroke-dasharray="4,4"/>
+      <!-- Línea Divisoria -->
+      <line x1="90" y1="8" x2="90" y2="107" stroke="#94A3B8" stroke-width="1.8" stroke-dasharray="3,3"/>
       
-      <!-- Lado Derecho (D) -->
-      <rect x="145" y="20" width="105" height="135" rx="8" fill="#1E293B" stroke="#00A9E0" stroke-width="2.5" stroke-dasharray="4,4"/>
-      <path d="M 157 40 Q 197 32 237 40 Q 243 78 237 120 Q 197 130 157 120 Q 151 78 157 40 Z" fill="#00365c" opacity="0.6"/>
-      <text x="197" y="90" text-anchor="middle" class="screen-text">D</text>
+      <!-- Ojo Derecho -->
+      <rect x="96" y="14" width="70" height="87" rx="5" fill="#1E293B" stroke="#00A9E0" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <path d="M 104 28 Q 131 22 158 28 Q 162 53 158 81 Q 131 88 104 81 Q 100 53 104 28 Z" fill="#00365c" opacity="0.6"/>
+      <text x="131" y="60" text-anchor="middle" class="screen-text">D</text>
 
-      <!-- Altavoz / Notch -->
-      <circle cx="6" cy="87" r="3.5" fill="#64748B"/>
+      <circle cx="4" cy="57" r="2.5" fill="#64748B"/>
     </g>
 
-    <!-- Texto en Español -->
-    <text x="182" y="325" text-anchor="middle" class="step-bold">Abre tu video o app VR 360°</text>
-    <text x="182" y="355" text-anchor="middle" class="step-desc">Pon la pantalla en modo dividido</text>
-    <text x="182" y="380" text-anchor="middle" class="step-desc">(ojo Izquierdo y Derecho)</text>
+    <!-- Texto -->
+    <text x="115" y="202" text-anchor="middle" class="step-bold">Abre tu video o app 360°</text>
+    <text x="115" y="222" text-anchor="middle" class="step-desc">Pon en pantalla dividida</text>
+    <text x="115" y="240" text-anchor="middle" class="step-desc">(modo Izquierdo y Derecho)</text>
   </g>
 
-  <!-- ==================== PASO 2: Desplegar Visor (Superior Derecha) ==================== -->
-  <g transform="translate(415, 20)">
-    <rect width="365" height="425" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
+  <!-- ==================== PASO 2: Desplegar Visor ==================== -->
+  <g transform="translate(260, 10)">
+    <rect width="230" height="268" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
     
     <!-- Header Paso -->
-    <circle cx="48" cy="48" r="22" fill="url(#primary-grad)"/>
-    <text x="48" y="55" text-anchor="middle" class="num-text">2</text>
-    <text x="82" y="55" class="step-title">Desplegar Visor</text>
+    <circle cx="30" cy="30" r="14" fill="url(#primary-grad)"/>
+    <text x="30" y="35" text-anchor="middle" class="num-text">2</text>
+    <text x="54" y="35" class="step-title">Desplegar Visor</text>
 
-    <!-- Ilustración Mecánica Grande -->
-    <g transform="translate(45, 95)">
+    <!-- Ilustración Mecánica -->
+    <g transform="translate(25, 58)">
       <!-- Eje Central -->
-      <rect x="122" y="10" width="26" height="165" rx="12" fill="#00365c"/>
-      <circle cx="135" cy="28" r="8" fill="#00A9E0"/>
-      <circle cx="135" cy="155" r="8" fill="#00A9E0"/>
+      <rect x="82" y="8" width="16" height="105" rx="8" fill="#00365c"/>
+      <circle cx="90" cy="20" r="5" fill="#00A9E0"/>
+      <circle cx="90" cy="100" r="5" fill="#00A9E0"/>
 
-      <!-- Brazo Izquierdo Desplegándose -->
-      <g transform="rotate(-28 135 28)">
-        <rect x="15" y="18" width="115" height="30" rx="10" fill="#00A9E0" stroke="#005C96" stroke-width="2"/>
-        <circle cx="50" cy="33" r="16" fill="#FFFFFF" stroke="#00365c" stroke-width="3"/>
-        <circle cx="50" cy="33" r="10" fill="#E0F2FE"/>
-        <!-- Aleta -->
-        <path d="M 15 48 L 40 100 L 95 100 L 115 48 Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5" opacity="0.8"/>
+      <!-- Brazo Izquierdo -->
+      <g transform="rotate(-28 90 20)">
+        <rect x="10" y="12" width="75" height="20" rx="7" fill="#00A9E0" stroke="#005C96" stroke-width="1.5"/>
+        <circle cx="34" cy="22" r="10" fill="#FFFFFF" stroke="#00365c" stroke-width="2"/>
+        <circle cx="34" cy="22" r="6" fill="#E0F2FE"/>
+        <path d="M 10 32 L 26 68 L 64 68 L 78 32 Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1" opacity="0.8"/>
       </g>
 
-      <!-- Brazo Derecho Desplegándose -->
-      <g transform="rotate(28 135 28)">
-        <rect x="140" y="18" width="115" height="30" rx="10" fill="#00A9E0" stroke="#005C96" stroke-width="2"/>
-        <circle cx="220" cy="33" r="16" fill="#FFFFFF" stroke="#00365c" stroke-width="3"/>
-        <circle cx="220" cy="33" r="10" fill="#E0F2FE"/>
-        <!-- Aleta -->
-        <path d="M 155 48 L 175 100 L 230 100 L 255 48 Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5" opacity="0.8"/>
+      <!-- Brazo Derecho -->
+      <g transform="rotate(28 90 20)">
+        <rect x="95" y="12" width="75" height="20" rx="7" fill="#00A9E0" stroke="#005C96" stroke-width="1.5"/>
+        <circle cx="146" cy="22" r="10" fill="#FFFFFF" stroke="#00365c" stroke-width="2"/>
+        <circle cx="146" cy="22" r="6" fill="#E0F2FE"/>
+        <path d="M 102 32 L 116 68 L 154 68 L 170 32 Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1" opacity="0.8"/>
       </g>
 
-      <!-- Flechas Grandes de Apertura -->
-      <path d="M 70 145 Q 95 175 118 160" fill="none" stroke="#005C96" stroke-width="4" stroke-linecap="round"/>
-      <polygon points="62,150 70,135 78,145" fill="#005C96"/>
+      <!-- Flechas de Apertura -->
+      <path d="M 46 95 Q 63 115 78 105" fill="none" stroke="#005C96" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="41,98 46,88 52,95" fill="#005C96"/>
 
-      <path d="M 200 145 Q 175 175 152 160" fill="none" stroke="#005C96" stroke-width="4" stroke-linecap="round"/>
-      <polygon points="208,150 200,135 192,145" fill="#005C96"/>
+      <path d="M 134 95 Q 117 115 102 105" fill="none" stroke="#005C96" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="139,98 134,88 128,95" fill="#005C96"/>
     </g>
 
-    <!-- Texto en Español -->
-    <text x="182" y="325" text-anchor="middle" class="step-bold">Abre el mini visor</text>
-    <text x="182" y="355" text-anchor="middle" class="step-desc">Extiende las aletas laterales</text>
-    <text x="182" y="380" text-anchor="middle" class="step-desc">para desplegar ambos lentes</text>
+    <!-- Texto -->
+    <text x="115" y="202" text-anchor="middle" class="step-bold">Abre el mini visor</text>
+    <text x="115" y="222" text-anchor="middle" class="step-desc">Extiende las aletas laterales</text>
+    <text x="115" y="240" text-anchor="middle" class="step-desc">para desplegar ambos lentes</text>
   </g>
 
-  <!-- ==================== PASO 3: Colocar en Móvil (Inferior Izquierda) ==================== -->
-  <g transform="translate(20, 475)">
-    <rect width="365" height="425" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
+  <!-- ==================== PASO 3: Colocar en Móvil ==================== -->
+  <g transform="translate(505, 10)">
+    <rect width="230" height="268" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
     
     <!-- Header Paso -->
-    <circle cx="48" cy="48" r="22" fill="url(#primary-grad)"/>
-    <text x="48" y="55" text-anchor="middle" class="num-text">3</text>
-    <text x="82" y="55" class="step-title">Colocar en Móvil</text>
+    <circle cx="30" cy="30" r="14" fill="url(#primary-grad)"/>
+    <text x="30" y="35" text-anchor="middle" class="num-text">3</text>
+    <text x="54" y="35" class="step-title">Colocar en Móvil</text>
 
-    <!-- Ilustración Acople Smartphone Grande -->
-    <g transform="translate(48, 85)">
-      <!-- Celular Base -->
-      <rect x="0" y="55" width="270" height="125" rx="16" fill="#1E293B" stroke="#475569" stroke-width="3"/>
-      <rect x="12" y="65" width="246" height="105" rx="8" fill="#0F172A"/>
+    <!-- Ilustración Acople -->
+    <g transform="translate(25, 52)">
+      <!-- Celular -->
+      <rect x="0" y="35" width="180" height="85" rx="10" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+      <rect x="8" y="42" width="164" height="71" rx="5" fill="#0F172A"/>
 
-      <!-- Pantallas I / D tenues -->
-      <rect x="22" y="73" width="105" height="89" rx="6" fill="#00365c" opacity="0.5"/>
-      <rect x="143" y="73" width="105" height="89" rx="6" fill="#00365c" opacity="0.5"/>
+      <rect x="15" y="47" width="70" height="60" rx="4" fill="#00365c" opacity="0.5"/>
+      <rect x="95" y="47" width="70" height="60" rx="4" fill="#00365c" opacity="0.5"/>
 
-      <!-- Mini Visor bajando sobre el borde superior -->
-      <g transform="translate(35, 5)">
-        <!-- Clip de anclaje -->
-        <rect x="90" y="15" width="20" height="45" rx="5" fill="#00A9E0"/>
-        <!-- Barra de soporte frontal -->
-        <rect x="0" y="5" width="200" height="42" rx="14" fill="#005C96" stroke="#00A9E0" stroke-width="3"/>
-        <circle cx="55" cy="26" r="16" fill="#FFFFFF" stroke="#00365c" stroke-width="3"/>
-        <circle cx="55" cy="26" r="10" fill="#E0F2FE"/>
-        <circle cx="145" cy="26" r="16" fill="#FFFFFF" stroke="#00365c" stroke-width="3"/>
-        <circle cx="145" cy="26" r="10" fill="#E0F2FE"/>
+      <!-- Mini Visor bajando -->
+      <g transform="translate(22, 0)">
+        <rect x="60" y="8" width="16" height="30" rx="4" fill="#00A9E0"/>
+        <rect x="0" y="2" width="136" height="28" rx="9" fill="#005C96" stroke="#00A9E0" stroke-width="2"/>
+        <circle cx="36" cy="16" r="10" fill="#FFFFFF" stroke="#00365c" stroke-width="2"/>
+        <circle cx="36" cy="16" r="6" fill="#E0F2FE"/>
+        <circle cx="100" cy="16" r="10" fill="#FFFFFF" stroke="#00365c" stroke-width="2"/>
+        <circle cx="100" cy="16" r="6" fill="#E0F2FE"/>
       </g>
 
-      <!-- Flechas Grandes hacia abajo -->
-      <path d="M 60 40 L 60 62 M 60 62 L 54 55 M 60 62 L 66 55" stroke="#00A9E0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M 210 40 L 210 62 M 210 62 L 204 55 M 210 62 L 216 55" stroke="#00A9E0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Flechas -->
+      <path d="M 40 26 L 40 40 M 40 40 L 36 35 M 40 40 L 44 35" stroke="#00A9E0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 140 26 L 140 40 M 140 40 L 136 35 M 140 40 L 144 35" stroke="#00A9E0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
 
-    <!-- Texto en Español -->
-    <text x="182" y="325" text-anchor="middle" class="step-bold">Engancha al smartphone</text>
-    <text x="182" y="355" text-anchor="middle" class="step-desc">Fija el clip del visor centrado</text>
-    <text x="182" y="380" text-anchor="middle" class="step-desc">en el borde superior de tu pantalla</text>
+    <!-- Texto -->
+    <text x="115" y="202" text-anchor="middle" class="step-bold">Engancha al smartphone</text>
+    <text x="115" y="222" text-anchor="middle" class="step-desc">Fija el clip del visor centrado</text>
+    <text x="115" y="240" text-anchor="middle" class="step-desc">en el borde superior de tu móvil</text>
   </g>
 
-  <!-- ==================== PASO 4: Centrar y Alinear (Inferior Derecha) ==================== -->
-  <g transform="translate(415, 475)">
-    <rect width="365" height="425" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
+  <!-- ==================== PASO 4: Centrar y Alinear ==================== -->
+  <g transform="translate(750, 10)">
+    <rect width="235" height="268" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
     
     <!-- Header Paso -->
-    <circle cx="48" cy="48" r="22" fill="url(#primary-grad)"/>
-    <text x="48" y="55" text-anchor="middle" class="num-text">4</text>
-    <text x="82" y="55" class="step-title">Centrar y Alinear</text>
+    <circle cx="30" cy="30" r="14" fill="url(#primary-grad)"/>
+    <text x="30" y="35" text-anchor="middle" class="num-text">4</text>
+    <text x="54" y="35" class="step-title">Centrar y Alinear</text>
 
-    <!-- Ilustración Alineación Grande -->
-    <g transform="translate(48, 85)">
-      <!-- Lentes Superiores alineados -->
-      <g transform="translate(15, 0)">
-        <path d="M 0 25 Q 120 5 240 25 Q 210 70 120 55 Q 30 70 0 25 Z" fill="#005C96" stroke="#00A9E0" stroke-width="2"/>
-        <circle cx="65" cy="35" r="22" fill="#FFFFFF" stroke="#00365c" stroke-width="4"/>
-        <circle cx="65" cy="35" r="14" fill="#E0F2FE"/>
-        <circle cx="175" cy="35" r="22" fill="#FFFFFF" stroke="#00365c" stroke-width="4"/>
-        <circle cx="175" cy="35" r="14" fill="#E0F2FE"/>
+    <!-- Ilustración Alineación -->
+    <g transform="translate(28, 52)">
+      <!-- Lentes Superiores -->
+      <g transform="translate(10, 0)">
+        <path d="M 0 16 Q 80 3 160 16 Q 140 46 80 36 Q 20 46 0 16 Z" fill="#005C96" stroke="#00A9E0" stroke-width="1.5"/>
+        <circle cx="43" cy="23" r="14" fill="#FFFFFF" stroke="#00365c" stroke-width="2.5"/>
+        <circle cx="43" cy="23" r="9" fill="#E0F2FE"/>
+        <circle cx="117" cy="23" r="14" fill="#FFFFFF" stroke="#00365c" stroke-width="2.5"/>
+        <circle cx="117" cy="23" r="9" fill="#E0F2FE"/>
       </g>
 
-      <!-- Smartphone Abajo -->
-      <rect x="0" y="80" width="270" height="100" rx="14" fill="#1E293B" stroke="#334155" stroke-width="3"/>
-      <rect x="10" y="88" width="118" height="84" rx="6" fill="#0F172A"/>
-      <text x="69" y="138" text-anchor="middle" class="screen-text" font-size="20">I</text>
+      <!-- Smartphone -->
+      <rect x="0" y="52" width="180" height="68" rx="9" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+      <rect x="7" y="58" width="79" height="56" rx="4" fill="#0F172A"/>
+      <text x="46" y="92" text-anchor="middle" class="screen-text" font-size="14">I</text>
 
-      <rect x="142" y="88" width="118" height="84" rx="6" fill="#0F172A"/>
-      <text x="201" y="138" text-anchor="middle" class="screen-text" font-size="20">D</text>
+      <rect x="94" y="58" width="79" height="56" rx="4" fill="#0F172A"/>
+      <text x="133" y="92" text-anchor="middle" class="screen-text" font-size="14">D</text>
 
-      <!-- Línea Guía de Alineación (Roja brillante punteada) -->
-      <line x1="135" y1="0" x2="135" y2="185" stroke="#EF4444" stroke-width="3.5" stroke-dasharray="6,4"/>
+      <!-- Línea Guía Roja -->
+      <line x1="90" y1="0" x2="90" y2="124" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="4,3"/>
       
-      <!-- Sello de Centrado Correcto (Check Verde) -->
-      <circle cx="135" cy="0" r="14" fill="#10B981" stroke="#FFFFFF" stroke-width="2.5"/>
-      <path d="M 129 0 L 133 4 L 141 -4" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Check Verde -->
+      <circle cx="90" cy="0" r="9" fill="#10B981" stroke="#FFFFFF" stroke-width="1.8"/>
+      <path d="M 86 0 L 89 3 L 94 -2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
     </g>
 
-    <!-- Texto en Español -->
-    <text x="182" y="325" text-anchor="middle" class="step-bold">Alinea al centro exacto</text>
-    <text x="182" y="355" text-anchor="middle" class="step-desc">Haz coincidir el centro del visor</text>
-    <text x="182" y="380" text-anchor="middle" class="step-desc">con la división del video</text>
+    <!-- Texto -->
+    <text x="117" y="202" text-anchor="middle" class="step-bold">Alinea al centro exacto</text>
+    <text x="117" y="222" text-anchor="middle" class="step-desc">Haz coincidir el centro del visor</text>
+    <text x="117" y="240" text-anchor="middle" class="step-desc">con la división del video</text>
   </g>
 </svg>

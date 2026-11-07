@@ -27,10 +27,10 @@
     }
     .poster {
       background: white;
-      border-radius: 24px;
-      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
       width: 100%;
-      max-width: 580px;
+      max-width: 680px;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
       border-top: 8px solid #00A9E0;
@@ -39,81 +39,152 @@
       display: inline-block;
       background: #E0F2FE;
       color: #005C96;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 50px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
     }
     h1 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: #004370;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
     }
     p {
       color: #64748B;
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
     }
     #qrcode {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 auto 1.5rem auto;
-      padding: 14px;
+      margin: 0 auto 0.8rem auto;
+      padding: 10px;
       background: white;
-      border: 3px solid #E2E8F0;
-      border-radius: 16px;
+      border: 2px solid #E2E8F0;
+      border-radius: 14px;
       width: fit-content;
     }
     .url-tag {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #005C96;
       font-weight: 600;
       word-break: break-all;
       background: #F1F5F9;
-      padding: 8px 12px;
+      padding: 6px 12px;
       border-radius: 8px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
     .btn-print {
       background: #005C96;
       color: white;
       border: none;
-      padding: 0.8rem 1.6rem;
+      padding: 0.7rem 1.4rem;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
+      transition: background 0.2s;
     }
     .btn-print:hover {
       background: #004370;
     }
     .poster-instructions {
-      margin-top: 1.5rem;
-      padding-top: 1.2rem;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
       border-top: 2px dashed #CBD5E1;
       text-align: center;
     }
     .instructions-title {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: #004370;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
     }
     .instructions-img {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 10px;
       border: 1px solid #E2E8F0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
+
+    /* Reglas estrictas para impresión en 1 sola página (A4 / Carta) */
+    @page {
+      size: auto;
+      margin: 8mm 10mm;
+    }
+
     @media print {
-      body { background: white; padding: 0; }
-      .poster { box-shadow: none; border: 2px solid #ccc; max-width: 100%; }
-      .btn-print { display: none; }
+      html, body {
+        background: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 100% !important;
+        overflow: hidden !important;
+      }
+      .poster {
+        box-shadow: none !important;
+        border: 2px solid #005C96 !important;
+        border-top: 6px solid #00A9E0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 12px 18px !important;
+        margin: 0 auto !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .badge {
+        margin-bottom: 4px !important;
+        padding: 3px 10px !important;
+        font-size: 0.68rem !important;
+      }
+      h1 {
+        font-size: 1.3rem !important;
+        margin-bottom: 2px !important;
+      }
+      p {
+        font-size: 0.82rem !important;
+        margin-bottom: 6px !important;
+      }
+      #qrcode {
+        padding: 6px !important;
+        margin-bottom: 6px !important;
+        border-width: 1.5px !important;
+      }
+      #qrcode canvas, #qrcode img {
+        width: 140px !important;
+        height: 140px !important;
+      }
+      .url-tag {
+        font-size: 0.72rem !important;
+        padding: 4px 8px !important;
+        margin-bottom: 6px !important;
+      }
+      .btn-print {
+        display: none !important;
+      }
+      .poster-instructions {
+        margin-top: 6px !important;
+        padding-top: 6px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .instructions-title {
+        font-size: 0.82rem !important;
+        margin-bottom: 4px !important;
+      }
+      .instructions-img {
+        max-height: 230px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+        margin: 0 auto !important;
+        display: block !important;
+      }
     }
   </style>
 </head>
@@ -133,14 +204,13 @@
   </div>
 
   <script>
-    // URL por defecto para GitHub Pages del repositorio
     const repoPagesUrl = "https://eldonconc.github.io/gamificacion-app/evaluacion.html";
     document.getElementById('urlText').innerText = repoPagesUrl;
 
     new QRCode(document.getElementById("qrcode"), {
       text: repoPagesUrl,
-      width: 210,
-      height: 210,
+      width: 180,
+      height: 180,
       colorDark : "#00365c",
       colorLight : "#ffffff",
       correctLevel : QRCode.CorrectLevel.H
